@@ -4,7 +4,7 @@
     margin: 15px;
     border-radius: 15px;
     -webkit-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.67); 
-box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.67);
+    box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.67);
 }
 .shareContainer{
     padding: 10px;
@@ -52,9 +52,10 @@ box-shadow: 0px 0px 16px -8px rgba(0,0,0,0.67);
 }
 .shareButton{
     border: none;
-    padding: 7px;
+    padding: 9px 20px;
     border-radius: 5px;
     background-color: green;
+    font-size: 16px;
     font-weight: 500;
     color: white;
     margin-right: 20px;

@@ -20,10 +20,11 @@
     margin: 0;
     list-style: none;
 }
-.sidebarListItem{
+.sidebarItem{
     display: flex;
     align-items: center;
     margin-bottom: 20px;
+    cursor: pointer;
 }
 .sidebarIcon{
     margin-right: 15px;
@@ -42,6 +43,7 @@
     padding: 0;
     margin: 0;
     list-style: none;
+    
 }
 .sidebarFriend{
     display: flex;
