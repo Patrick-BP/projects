@@ -1,6 +1,7 @@
 import React from "react";
 import './online.css'
 export default function online({users}) {
+  const PF = process.env.REACT_APP_PUBLIC_FOLDER;
   return (
     <>
      {users.map(user=>{
@@ -8,7 +9,7 @@ export default function online({users}) {
             <li key={user.id} className="rigthbarFriend">
             <div className="rightbarProfileImgContainer">
               <img
-                src={user.profilePicture}
+                src={PF+user.profilePicture}
                 alt=""
                 className="rightbarProfileImg"
               />
