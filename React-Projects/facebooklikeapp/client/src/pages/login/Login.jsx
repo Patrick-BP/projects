@@ -1,6 +1,24 @@
-import React from 'react'
-import './login.css'
+import React, { useContext, useRef } from 'react'
+import './login.css';
+import {loginCall} from '../../apiCalls'
+import { AuthContext } from '../../context/AuthContext';
+import {Stack, CircularProgress} from '@mui/material'
+import { useNavigate } from 'react-router-dom';
+
 export default function Login() {
+    const navigate = useNavigate()
+    const email = useRef();
+    const password = useRef();
+    
+    const {isFetching, dispatch} = useContext(AuthContext)
+    const handleClick = (event)=>{
+        event.preventDefault();
+       
+        loginCall({email: email.current.value, password:password.current.value}, dispatch)
+    }
+    const toRegister = ()=>{
+        navigate('/register')
+    }
   return (
     <div className='login'>
         <div className="loginWrapper">
@@ -11,13 +29,14 @@ export default function Login() {
                 </span>
             </div>
             <div className="loginRight">
-                <div className="loginBox">
-                     <input type="Email" placeholder='Email' className="loginInput" />
-                    <input type="password" placeholder='password' className="loginInput" />
-                    <button className="loginButton">Log In</button>
+                <form onSubmit={handleClick} className="loginBox" >
+                    
+                     <input type="Email" placeholder='Email' value='paul@gmail.com' className="loginInput" ref={email} />
+                    <input type="password" placeholder='password' value="123" className="loginInput" ref={password}  />
+                    {isFetching ? <Stack spacing ={2}><CircularProgress /></Stack> : <button className="loginButton" type='submit'>Log In </button>}
                     <span className="loginForgot">Forgot password</span>
-                    <button className="loginRegisterButton">Create a new Account</button>
-                </div>
+                    <button className="loginRegisterButton" type='button' onClick={toRegister}>Create a new Account</button>
+                </form>
                
                 
             </div>
@@ -25,3 +44,4 @@ export default function Login() {
     </div>
   )
 }
+

@@ -1,37 +1,50 @@
 import './post.css'
 import {MoreVert } from '@mui/icons-material';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useContext } from 'react';
+import {Link} from 'react-router-dom';
 import axios from 'axios';
+import {format} from 'timeago.js';
+import { AuthContext } from '../../context/AuthContext';
+
+
 
 const Post = ({post}) => {
     const [user, setUser] = useState({});
     const [like, setLike] = useState(post.likes.length);
     const [isLiked, setIsLiked] = useState(false);
     const PF = process.env.REACT_APP_PUBLIC_FOLDER;
+    const {user:currentUser} = useContext(AuthContext)
+ useEffect(()=>{
+    setIsLiked(post.likes.includes(currentUser._id))
+ },[currentUser._id, post.likes])
+
     useEffect(()=>{
-        const fetchUser = async ()=>{
-            const res = await axios.get(`users/${post.userId}`);
-            setUser(res.data)
-            console.log(res.data);  
-        };
-        fetchUser();
-        
-    },[])
+        (async function fetchUser(){
+            const res = await axios.get(`/users?userId=${post.userId}`);
+            setUser(res.data) 
+        })();
+    },[post.userId])
 
 
     const likeHandler = ()=>{
+        try{
+            axios.put("/posts/"+post._id+"/like", {userId:currentUser._id})
+        }catch(err){}
         setLike(isLiked? like-1 : like+1)
         setIsLiked(!isLiked)
     }
    
     return (
-        <div className='post'>
+        <div className='post' >
             <div className="postTopWrapper">
             <div className="postTop">
                 <div className="postTopLeft">
-                    <img src={user.profilePicture || PF+"person/noAvatar.png"} alt="" className="postProfileImg" />
+                    <Link to={`profile/${user.username}`}>
+                    <img src={user.profilePicture ? PF + user.profilePicture : PF+"person/noAvatar.png"} alt="" className="postProfileImg" />
+                    </Link>
+                    
                     <span className="postUserName">{user.username}</span>
-                    <span className="postDate">{post.date}</span>
+                    <span className="postDate">{format(post.createdAt)}</span>
                 </div>
                 <div className="postTopRight">
                     <MoreVert/>

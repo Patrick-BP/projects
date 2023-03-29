@@ -42,7 +42,7 @@ exports.deletePost = async (req, res)=>{
     }
 };
 
-exports.updateLike = async (req, res)=>{
+exports.like = async (req, res)=>{
     try{
         const post = await Post.findById(req.params.id);
         if(!post.likes.includes(req.body.userId)){
@@ -50,7 +50,7 @@ exports.updateLike = async (req, res)=>{
             res.status(200).json("the post has been liked");
         }else{
             await post.updateOne({$pull:{likes: req.body.userId}});
-            res.status(403).json("you post has been disliked");
+            res.status(200).json("you post has been disliked");
         }
     }catch(err){
         res.status(500).json(err)
@@ -73,12 +73,22 @@ exports.getTimeLine = async (req, res)=>{
         const userPosts = await Post.find({userId: currentuser._id});
         const friendPosts = await Promise.all(
             currentuser.followings.map((friendId)=>{
-                return Post.find({userId: friendId})
+                return Post.find({userId: friendId});
             })
         );
-        res.json(userPosts.concat(...friendPosts))
+        res.status(200).json(userPosts.concat(...friendPosts));
     }catch(err){
         res.status(500).json(err)
     }
 };
 
+exports.getAllUserPosts = async (req, res)=>{
+    try{
+        const user = await User.findOne({username:req.params.username})
+        const posts = await Post.find({userId: user._id});
+   
+        res.json(posts)
+    }catch(err){
+        res.status(500).json(err)
+    }
+};

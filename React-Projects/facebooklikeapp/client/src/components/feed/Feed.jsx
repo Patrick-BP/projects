@@ -1,26 +1,32 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Post from '../post/Post';
 import Share from '../share/share';
 import './feed.css';
 import axios from 'axios';
-const Feed = () => {
+import { AuthContext } from '../../context/AuthContext';
+
+
+const Feed = ({username}) => {
+    const {user} = useContext(AuthContext)
     const [posts, setPosts] = useState([]);
 
     useEffect(()=>{
-        const fetchPosts = async ()=>{
-            const res = await axios.get(`posts/timeline/6413fe3fb8b429a8a9e9c6b7`);
-            setPosts(res.data)
-            console.log(res.data);  
-        };
-        fetchPosts();
-        
-    },[])
+       (async function fetchPosts(){
+            const res = username 
+            ? await axios.get(`/posts/profile/${username}`) 
+            : await axios.get(`/posts/timeline/${user._id}`) ;
+            setPosts(res.data.sort((p1, p2)=>{
+                return new Date(p2.createdAt) - new Date(p1.createdAt)
+            })) 
+        })();
+    },[username, user._id])
     return (
         <div className='feed'>
             <div className="feedWrapper">
-                <Share/>
-                {posts.map(post=>{
-                   return <Post key={post.id} post={post}/>
+                {username === user.username && <Share/>}
+                {posts && posts.map(post=>{
+                    
+                   return <Post key={post._id} post={post}/>
                 })}
                
 
