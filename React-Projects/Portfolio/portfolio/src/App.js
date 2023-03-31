@@ -16,6 +16,7 @@ function App() {
     y: 0
   });
   console.log(mousePosition);
+  
 
   useEffect(() => {
     const mouseMove = e => {

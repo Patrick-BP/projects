@@ -2,12 +2,12 @@ import React from 'react'
 import '../../pages/style.css';
 import ProjectCard from "./ProjectCard";
 import { Container, Row, Col } from 'react-bootstrap'
-import useradminpanel from '../../Assets/Admin-Panel-Dashboard.png'
-import olximage from '../../Assets/olx-clone image.png'
-import netfliximage from '../../Assets/React-App-netflix-clone.png'
-import gridlinesbuilders from '../../Assets/Gridlinesbuilders.png'
-import charlespizza from '../../Assets/Charlestown-Pizza.png'
-import todolist from '../../Assets/todolist.png'
+import socialmedia from '../../Assets/socialmedia.png'
+import goalTrimage from '../../Assets/goaltracker.png'
+import gofliximage from '../../Assets/goflix.png'
+import restaurentManagnemnt from '../../Assets/restaurant.jpg'
+import movienight from '../../Assets/movienight.png'
+import course from '../../Assets/course.png'
 
 function Projectlist() {
   return (
@@ -17,67 +17,68 @@ function Projectlist() {
           <Row style={{ justifyContent: "center", paddingBottom: "10px" }}>
             <Col md={4} className="project-card">
               <ProjectCard
-                imgPath={useradminpanel}
+                imgPath={socialmedia}
                 isBlog={false}
-                title="Sodia media App"
+                title="Social Media App"
                 description="simular to facebook user can add/delete a post, follow/unfollow friends, see how is online"
-                ghLink="https://rahul-dashboard-pannel.netlify.app"
-                technologies={["angular","materialui", "nodejs", "mongodb","html","css"]}
+                ghLink=""
+                technologies={["react", "nodejs", "mongodb","html","css"]}
               />
             </Col>
 
             <Col md={4} className="project-card">
               <ProjectCard
-                imgPath={olximage}
+                imgPath={goalTrimage}
                 isBlog={false}
                 title="Goal Tracker"
                 description="Olx-clone builds with react js. using firebase as a backend and deploying in firebase. Olx-Clone is a potential classified advertisement website that categorizes objects in a user-friendly manner & displays them as advertisements.. Classifieds can be posted that involve selling, and buying using React-router, context, react hooks."
-                ghLink="https://olx-clone-rahul.netlify.app/"
-                technologies={["react", "nodejs", "mongodb","html","css"]}
+                ghLink=""
+                technologies={["angular", "nodejs", "mongodb","html","css"]}
               />
             </Col>
 
             <Col md={4} className="project-card">
               <ProjectCard
-                imgPath={netfliximage}
+                imgPath={gofliximage}
                 isBlog={false}
                 title="GoFlix"
                 description="This project is a simplified front-end clone of Netflix. It was created with React js. It uses TMDB (The Movie Data Base ) API and uses the Axios tool. Users can click movie images with embedded YouTube trailers or related videos about the movie."
-                ghLink="https://react-rahul-netflix-clone.netlify.app/"
+                ghLink=""
+                technologies={["angular","materialui", "nodejs", "mongodb","html"]}
+              />
+            </Col>
+            <Col md={4} className="project-card">
+              <ProjectCard
+                imgPath={movienight}
+                isBlog={false}
+                title="Movie Night"
+                description="Charlestown pizza is a static website completely build with bootstrap with fully responsive."
+                ghLink=""
                 technologies={["react", "nodejs", "mongodb","html","css"]}
               />
             </Col>
 
             <Col md={4} className="project-card">
               <ProjectCard
-                imgPath={gridlinesbuilders}
+                imgPath={restaurentManagnemnt}
                 isBlog={false}
-                title="Rectaurent Management app"
+                title="Rectaurent Management"
                 description="Grid line builders is a static webpage built with HTML, CSS, and JavaScript. Users can see images of their work and contact information that helps to connect the home builders through a webpage. webpage builds responsive to multiple sizes of devices."
-                ghLink="https://gridlinesbuilders.in/"
+                ghLink=""
                 technologies={["react-native", "nodejs", "mongodb"]}
               />
             </Col>
 
-            <Col md={4} className="project-card">
-              <ProjectCard
-                imgPath={charlespizza}
-                isBlog={false}
-                title="Movie Streaming app"
-                description="Charlestown pizza is a static website completely build with bootstrap with fully responsive."
-                ghLink="https://rahulvijay81.github.io/Pizzastore-bootstrap/"
-                technologies={["react", "nodejs", "mongodb","html","css"]}
-              />
-            </Col>
+           
 
             <Col md={4} className="project-card">
               <ProjectCard
-                imgPath={todolist}
+                imgPath={course}
                 isBlog={false}
-                title="To Do List"
+                title="Course Review App"
                 description=" To-Do App that build will allow a user to add a task to a list of to-do items. Once the task is added, the user will be able to delete it as completed once it has done."
                 ghLink="https://todolist-rahul81.netlify.app/"
-                technologies={["react", "nodejs", "mongodb","html","css"]}
+                technologies={["react-native", "nodejs", "mongodb","html","css"]}
 
               />
             </Col>
