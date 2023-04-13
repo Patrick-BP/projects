@@ -39,14 +39,15 @@ ul.nav-news-feed li i{
   margin: 10px;
   width: 100%;
   padding: 20px;
+  background-color: #fff;
+  
 }
 
 .manageCategory{
+  background-color: #fff;
+}
 
-}
-.filterInput{
-  border: none;
-  border-bottom: 2px solid #1E56AF;
-  width: 95%;
-  margin: 10px;
-}
+ 
+
+
+
