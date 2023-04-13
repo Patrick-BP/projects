@@ -32,6 +32,15 @@ export class AppComponent implements OnInit{
       }
       )
   }
+
+public searchEmployee(key: string){
+  if(key.length == 0){
+    this.getEmployee()
+  }else{
+    this.employees = this.employees?.filter(employee=> employee.name.toLowerCase().includes(key) || employee.phone.toLowerCase().includes(key) || employee.jobTitle.toLowerCase().includes(key))
+  }
+    
+}  
 public onAddEmployee(addForm: NgForm):void{
   document.getElementById("add-employee-form")?.click();
   this.employeeService.addEmployee(addForm.value).subscribe(

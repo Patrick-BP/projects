@@ -1,8 +1,6 @@
-package tech.getarrays.employeemanager.model;
+package com.patrick.employeemanager.model;
 
 import jakarta.persistence.*;
-
-
 
 import java.io.Serializable;
 
