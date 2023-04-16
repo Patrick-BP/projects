@@ -7,12 +7,12 @@ axios.defaults.baseURL = "http://localhost:5000/";
 export default function ManageOrder() {
     const [orders, setorders] = useState([]);
     const [customer, setCustomer] = useState({name:"", email:"", Contact_number:0, payment_method:""});
-    const [order, setOrder] = useState({category:"", product:"", price:0, quantity:0, price:""})
+    const [order, setOrder] = useState({category:"", product:"", price:0, quantity:1, total:0})
 
     const [categories, setCategories] = useState([]);
     const [products, setProductList] = useState([]);
 
-    const [product, setProduct] = useState({});
+    const [product, setProduct] = useState();
 
     useEffect(()=>{
         fetchProducts();
@@ -27,10 +27,8 @@ export default function ManageOrder() {
     };
 
     async function fetchCategories(){
-        
-        const categoriesList = await axios.get('category/all');
-        const filteredCat = categoriesList.data.data.filter(cat=> products.some(prod => prod.category_id === cat.name));
-        setCategories(filteredCat);
+        const res = await axios.get('category/all')
+        setCategories(res.data.data);
         
     };
 
@@ -38,18 +36,21 @@ export default function ManageOrder() {
 
     const handleProdInput =(event)=> {
         const {value, name} = event.target;
-        setOrder(prev=> ({...prev, [name]: value}));
-
-        if(order.product){
-            const findSelectedProd  = products.find(prod=> prod.name === order.product);
-            setProduct(findSelectedProd);
-        }
+        setOrder(prev=> ({...prev, [name]: value, price:(product ? product.price : 0),  total:(prev.price*prev.quantity) })); 
+        
     }
-    console.log("prod: ", products)
-    
-    console.log("cat:" , categories)
+const checkProd = (e) => {
+setProduct(products.find(prod=> prod.name === e.target.value));
+setOrder(prev=> ({...prev, total:(prev.price*prev.quantity) })); 
 
-    console.log("order: ", order)
+}
+   
+const calTotal = ()=>{
+    setOrder(prev=> ({...prev, total:(prev.price*prev.quantity) })); 
+}
+
+    console.log(product);
+  console.log(order);
   return (
     <>
      <div className='manageCategory d-flex p-3 justify-content-between shadow'>
@@ -89,30 +90,31 @@ export default function ManageOrder() {
             <h6>Select Product:</h6> 
             <div className=' d-flex mt-5 center'>
                 <div className="inputbox">
-                <select className="form-select form-select-sm" aria-label=".form-select-sm example" name='category' value={order.category} onChange={handleProdInput}>
+                <select className="form-select form-select-sm" disabled={categories.length == 0} aria-label=".form-select-sm example" name='category' value={order.category} onChange={handleProdInput}>
                     <option   defaultValue={true} >Choose a category</option>
-                    {categories && categories.map(cat=><option key={cat._id} value={cat.name}>{cat.name}</option>)}
+                    {categories && categories.filter(cat=> products.some(prod => prod.category_id === cat.name))
+                    .map(cat=><option key={cat._id} value={cat.name}>{cat.name}</option>)}
                 </select>
                 </div>
                 <div className="inputbox">
-                <select className="form-select form-select-sm" aria-label=".form-select-sm example" disabled={!order.category} name='category_id' value={products.name} onChange={handleProdInput}>
+                <select className="form-select form-select-sm" aria-label=".form-select-sm example" disabled={!order.category} name='product' value={product?.name} onClick={checkProd} onChange={handleProdInput}>
                 <option   defaultValue={true} >Choose a product</option>
-                {products && products.filter(prod=> prod.category_id === order.category).map(prod=><option key={prod._id} value={prod._id}>{prod.name}</option>)}
+                {products && products.filter(prod=> prod.category_id === order.category).map(prod=><option key={prod._id} value={prod.name}>{prod.name}</option>)}
             </select>
                 </div>
                 <div className="inputbox">
-                    <input type='numbert'  name="price" disabled  value={product.price} onChange={handleProdInput} placeholder='Price'/>   
+                    <input type='numbert'  name="price" disabled  value={product?.price} onChange={handleProdInput} placeholder='Price'/>   
                 </div>
                 <div className="inputbox">
                     <input type='number'  name="quantity" value={order.quantity} onChange={handleProdInput} placeholder='Quantity*'/>  
                 </div>
-                <div className="inputbox">
-                    <input type='number'  name="total"  disabled value={product.quantity && product.price * product.quantity } onChange={handleProdInput} placeholder='Total*'/>   
+                <div className="inputbox d-flex">
+                 <b className='fs-4 mt-2'>$</b><input type='number'  name="total" onClick={calTotal}  disabled value={order.total } onChange={handleProdInput} placeholder='Total*'/>   
                 </div>
             </div>
             <div className='d-flex justify-content-between mt-4'>
                 <button className='btn btn-secondary  '>Add</button>
-                <div className='totalAmount'><i className="bi bi-currency-dollar"></i> Total amount: {product.quantity && product.price * product.quantity }</div>
+                <div className='totalAmount'><i className="bi bi-currency-dollar"></i> Total amount:  {order.total }</div>
             </div>
             </div>
            
