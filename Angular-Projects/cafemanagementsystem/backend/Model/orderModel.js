@@ -5,7 +5,7 @@ const OrderSchema = new mongoose.Schema({
     name:{type:String, required: true},
     email: {type: String, required: true},
     contact_number: String,
-    payment_Method: String,
+    payment_method: String,
     total: Number,
     product_details:[{
         name:String,

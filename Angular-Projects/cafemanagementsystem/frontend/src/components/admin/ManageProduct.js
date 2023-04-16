@@ -11,38 +11,50 @@ export default function ManageProduct() {
     const [productList, setProductList] = useState([]);
     const [filter, setFilter] = useState("");
     const [editData, setEditData] = useState({});
-    const [list, setlist] = useState([]);
+    
     const [categories, setCategories] = useState([]);
 
+    // fetch data from DB
     async function fetchData(){
         const category = await axios.get('category/all');
         setCategories(category.data.data)
         const list = await axios.get('product/all');
         setProductList(list.data.data);
-        setlist(list.data.data);
+        
     };
 
     useEffect(()=>{
         fetchData()
     },[]);
 
+    // filter Product
+
     const handleSearch = (event) => {
         const {value} = event.target;
         setFilter(value);
-        if(filter.length >0){
-            const filterResult = productList.filter(prod => prod.name.toLowerCase().includes(filter.toLowerCase()));
+        if(value.length >0){
+            const filterResult = productList.filter(prod => prod.name.toLowerCase().includes(value.toLowerCase()) || prod.category_id.toLowerCase().includes(value.toLowerCase()) );
             setProductList(filterResult);
         }else{
-            setProductList(list);
+           fetchData()
         }
 }
+
+// handle edit input
 
 const handleChanges = (event) => {
     const {value, name} = event.target;
     setEditData(prev=> ({...prev, [name]:value}));
     }
+
+    // Edit a single Product
     
     const handleEdit = async ()=>{
+        for(let cat of categories){
+           if(cat.name === editData.category_id){
+            editData.category_id = cat._id
+           } 
+        }
        const result = await axios.put(`product/update/${editData._id}`, editData);
        if(result.data.error){
         tosterError(result.data.message);
@@ -51,6 +63,7 @@ const handleChanges = (event) => {
     
         tosterSuccess(result.data.message);
        setEditData({name:"", category_id:"", description: "" , price: 0});
+       fetchData();
     }
     
         
@@ -60,6 +73,7 @@ const handleChanges = (event) => {
         setNewProduct(prev=> ({...prev, [name]:value}));
         }
 
+        // add new Product
     const submitNewProduct = async () => {
         let result;
         try{
@@ -67,12 +81,13 @@ const handleChanges = (event) => {
         }catch(error){
             tosterError(error.message); 
         }
-        console.log(newProduct)
+       
         if(result?.data?.error){
             tosterError(result?.data?.message);  
         }else{
             tosterSuccess(result?.data?.message);
             fetchData();
+            setNewProduct({name:"", category_id:"", description: "" , price: 0});
         }
         
     
@@ -80,14 +95,14 @@ const handleChanges = (event) => {
     
     const deleteCategory = async (id) => {
        
-     const result = await axios.delete(`delete/${id}`);
+     const result = await axios.delete(`product/delete/${id}`);
      if(result.data.error){
         tosterError(result.data.message);
     
     
     }else{
         tosterSuccess(result.data.message);
-    
+        fetchData();
     }
     
     }
@@ -147,12 +162,20 @@ const handleChanges = (event) => {
                                         
                            {product._id === editData._id  ? (<tr key={product._id} className='tableText'>
                                     <td><input type='text' name="name" value={editData.name} onChange={handleChanges}/></td>
-                                    <td> <input type='text' name="category" value={editData.category_id} onChange={handleChanges}/></td>
+                                    <td> 
+                                    <select className="form-select form-select-sm" aria-label=".form-select-sm example" name='category_id' value={editData.category_id} onChange={handleAddInput}>
+                                        <option   defaultValue={true} >Choose a category</option>
+                                        {categories && categories.map(cat=><option key={cat._id} value={cat._id}>{cat.name}</option>)}
+                                    </select>
+                                    </td>
                                     <td> <input type='text'name="description" value={editData.description} onChange={handleChanges}/></td>
                                     <td><input type='text'name="price" value={editData.price} onChange={handleChanges}/></td>
                                     <td style={{width: "20%"}} className='d-flex justify-content-center w-100'>
                                         <a href="#" className="table-link fs-5  text-dark"onClick={handleEdit}>
                                         <span className="material-symbols-outlined"  title="Save Changes">save</span>
+                                        </a>
+                                        <a href="#" className="table-link fs-5  text-dark" title='Cancel' onClick={()=>setEditData({})}>
+                                        <i className="bi bi-x-square"></i>
                                         </a>
                                         
                                     </td>
