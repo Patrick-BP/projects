@@ -21,9 +21,8 @@ export default function ManageOrder() {
     },[]);
 
     async function fetchProducts(){
-        const productsList = await axios.get('product/all');
-        setProductList(productsList.data.data);
-        console.log("productfected",products)
+        const prodList = await axios.get('product/all');
+        setProductList(prodList.data.data);
         
     };
 
