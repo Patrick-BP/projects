@@ -23,7 +23,7 @@ exports.addProduct = async (req, res) => {
     res.status(201).json(new Response(false, "A new Product was added", result));
 } catch (error) {
   console.log(error.message);
-  res.status(500).json(new Response(true, "Adding New Product Failed!", null));
+  res.status(500).json(new Response(true, error.message, null));
 }
 };
 

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import './ManageCategory.css';
+import {tosterError, tosterSuccess} from '../tosterMessage';
 import axios from 'axios'
 
 
@@ -10,18 +11,19 @@ export default function ManageCategory() {
     const [categoryList, setCategoryList] = useState([]);
     const [filter, setFilter] = useState("");
     const [editData, setEditData] = useState({});
-    const [list, setlist] = useState([])
+
     
     axios.defaults.baseURL = "http://localhost:5000/";
 
-    async function fetchData(){
+    const fetchData = async()=>{
         const list = await axios.get('category/all');
         setCategoryList(list.data.data);
-        setlist(list.data.data);
+        
     }
 
 useEffect(()=>{
     fetchData()
+   
 },[]);
 
 
@@ -43,67 +45,25 @@ setEditData(prev=> ({...prev, [name]:value}));
 
 const handleEdit = async ()=>{
    const result = await axios.put(`category/update/${editData._id}`, editData);
-   if(result.data.error){
-        
-    toast.error(result.data.message, {
-   position: "top-right",
-   autoClose: 5000,
-   hideProgressBar: false,
-   closeOnClick: true,
-   pauseOnHover: true,
-   draggable: true,
-   progress: undefined,
-   theme: "light",
-   });
    
-
+   if(result.data.error){
+    tosterError(result.data.message);
 }else{
-toast.success(result.data.message, {
-   position: "top-right",
-   autoClose: 5000,
-   hideProgressBar: false,
-   closeOnClick: true,
-   pauseOnHover: true,
-   draggable: true,
-   progress: undefined,
-   theme: "light",
-   });
-setEditData({});
+    tosterSuccess(result.data.message);
+    setEditData({});
 }
-
-    
+  
 }
 
 const submitNewCategory = async () => {
     const result = await axios.post('category/add', newCategory);
     if(result.data.error){
-        
-             toast.error(result.data.message, {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
+        tosterError(result.data.message);
         setEditData({name:""});
        
     }else{
-        toast.success(result.data.message, {
-            position: "top-right",
-            autoClose: 2000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
-
-            
-
+        tosterSuccess(result.data.message);
+        fetchData();
     }
     
 
@@ -113,30 +73,11 @@ const deleteCategory = async (id) => {
    
  const result = await axios.delete(`category/delete/${id}`);
  if(result.data.error){
-    toast.error(result.data.message, {
-   position: "top-right",
-   autoClose: 5000,
-   hideProgressBar: false,
-   closeOnClick: true,
-   pauseOnHover: true,
-   draggable: true,
-   progress: undefined,
-   theme: "light",
-   });
-
+    tosterError(result.data.message);
 
 }else{
-toast.success(result.data.message, {
-   position: "top-right",
-   autoClose: 5000,
-   hideProgressBar: false,
-   closeOnClick: true,
-   pauseOnHover: true,
-   draggable: true,
-   progress: undefined,
-   theme: "light",
-   });
-
+    tosterSuccess(result.data.message);
+    fetchData();
 }
 
 }
@@ -260,7 +201,7 @@ toast.success(result.data.message, {
 <div className="modal fade" id="deletecategory" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div className="modal-dialog">
     <div className="modal-content">
-      <div className="modal-header">
+      <div className="modal-header bg-danger">
         <h1 className="modal-title fs-5" id="exampleModalLabel">Delete Category</h1>
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
@@ -270,7 +211,7 @@ toast.success(result.data.message, {
 
       </div>
       <div className="modal-footer">
-      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={()=>deleteCategory(editData.id)}  >Delete</button>
+      <button type="button" className="btn btn-danger" data-bs-dismiss="modal" onClick={()=>deleteCategory(editData.id)}  >Delete</button>
       <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         
       </div>

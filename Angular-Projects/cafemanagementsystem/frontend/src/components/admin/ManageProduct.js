@@ -1,35 +1,36 @@
 import React ,{useState, useEffect}from 'react';
 import './ManageProduct.css';
 import { ToastContainer, toast } from 'react-toastify';
+import {tosterError, tosterSuccess} from '../tosterMessage';
 import axios from 'axios';
  
 axios.defaults.baseURL = "http://localhost:5000/";
 
 export default function ManageProduct() {
-    const [newProduct, setNewProduct] = useState({name:""});
+    const [newProduct, setNewProduct] = useState({name:"", category_id:"", description: "" , price: 0});
     const [productList, setProductList] = useState([]);
     const [filter, setFilter] = useState("");
     const [editData, setEditData] = useState({});
     const [list, setlist] = useState([]);
     const [categories, setCategories] = useState([]);
 
-
+    async function fetchData(){
+        const category = await axios.get('category/all');
+        setCategories(category.data.data)
+        const list = await axios.get('product/all');
+        setProductList(list.data.data);
+        setlist(list.data.data);
+    };
 
     useEffect(()=>{
-        (async function fetchData(){
-            const category = await axios.get('category/all');
-            setCategories(category.data.data)
-            const list = await axios.get('product/all');
-            setProductList(list.data.data);
-            setlist(list.data.data);
-        })()
+        fetchData()
     },[]);
 
     const handleSearch = (event) => {
         const {value} = event.target;
         setFilter(value);
         if(filter.length >0){
-            const filterResult = productList.filter(cat => cat.name.toLowerCase().includes(filter.toLowerCase()));
+            const filterResult = productList.filter(prod => prod.name.toLowerCase().includes(filter.toLowerCase()));
             setProductList(filterResult);
         }else{
             setProductList(list);
@@ -42,66 +43,36 @@ const handleChanges = (event) => {
     }
     
     const handleEdit = async ()=>{
-       const result = await axios.put(`update/${editData._id}`, editData);
+       const result = await axios.put(`product/update/${editData._id}`, editData);
        if(result.data.error){
-            
-        toast.error(result.data.message, {
-       position: "top-right",
-       autoClose: 5000,
-       hideProgressBar: false,
-       closeOnClick: true,
-       pauseOnHover: true,
-       draggable: true,
-       progress: undefined,
-       theme: "light",
-       });
-       
+        tosterError(result.data.message);
     
     }else{
-    toast.success(result.data.message, {
-       position: "top-right",
-       autoClose: 5000,
-       hideProgressBar: false,
-       closeOnClick: true,
-       pauseOnHover: true,
-       draggable: true,
-       progress: undefined,
-       theme: "light",
-       });
-    setEditData({});
+    
+        tosterSuccess(result.data.message);
+       setEditData({name:"", category_id:"", description: "" , price: 0});
     }
     
         
     }
-    
-    const submitNewCategory = async () => {
-        const result = await axios.post('add', newProduct);
-        if(result.data.error){
-            
-                 toast.error(result.data.message, {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                });
-            setEditData({name:""});
-           
+    const handleAddInput = (event) => {
+        const {value, name} = event.target;
+        setNewProduct(prev=> ({...prev, [name]:value}));
+        }
+
+    const submitNewProduct = async () => {
+        let result;
+        try{
+         result = await axios.post('product/add', newProduct);
+        }catch(error){
+            tosterError(error.message); 
+        }
+        console.log(newProduct)
+        if(result?.data?.error){
+            tosterError(result?.data?.message);  
         }else{
-            toast.success(result.data.message, {
-                position: "top-right",
-                autoClose: 2000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-                theme: "light",
-                });
-    
+            tosterSuccess(result?.data?.message);
+            fetchData();
         }
         
     
@@ -111,33 +82,17 @@ const handleChanges = (event) => {
        
      const result = await axios.delete(`delete/${id}`);
      if(result.data.error){
-        toast.error(result.data.message, {
-       position: "top-right",
-       autoClose: 5000,
-       hideProgressBar: false,
-       closeOnClick: true,
-       pauseOnHover: true,
-       draggable: true,
-       progress: undefined,
-       theme: "light",
-       });
+        tosterError(result.data.message);
     
     
     }else{
-    toast.success(result.data.message, {
-       position: "top-right",
-       autoClose: 5000,
-       hideProgressBar: false,
-       closeOnClick: true,
-       pauseOnHover: true,
-       draggable: true,
-       progress: undefined,
-       theme: "light",
-       });
+        tosterSuccess(result.data.message);
     
     }
     
     }
+
+   
 
   return (
     <>
@@ -251,20 +206,45 @@ const handleChanges = (event) => {
         <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div className="modal-body ">
-        <form>
-            <input  type="text" placeholder='Name' className='addCategoryInput mb-3' />
-        <section class="form-select" aria-label="Default select example">
-            {categories && categories.map(cat=><option key={cat._id} value={cat._id}>{cat.name}</option>)}
-        </section>
-        <input  type="text" placeholder='description' className='addCategoryInput mb-3' />
-        <input  type="text" placeholder='price' className='addCategoryInput mb-3' />
+        <form className='d-flex flex-column gap-4'>
+            <input  type="text" placeholder='Name' name='name' value={newProduct.name} onChange={handleAddInput} className='addCategoryInput mb-3' />
+            <select className="form-select form-select-sm" aria-label=".form-select-sm example" name='category_id' value={newProduct.category_id} onChange={handleAddInput}>
+                <option   defaultValue={true} >Choose a category</option>
+                {categories && categories.map(cat=><option key={cat._id} value={cat._id}>{cat.name}</option>)}
+            </select>
+        
+        <input  type="text" placeholder='description' className='addCategoryInput mb-3' name='description' value={newProduct.description} onChange={handleAddInput} />
+        <input  type="number" placeholder='price' className='addCategoryInput mb-3' name='price' value={newProduct.price} onChange={handleAddInput}/>
         </form>
         
         
       </div>
       <div className="modal-footer">
-      <button type="button" className="btn btn-primary">Add</button>
+      <button type="button" className="btn btn-primary" data-bs-dismiss="modal" onClick={submitNewProduct}>Add</button>
       <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+<div className="modal fade" id="deletecategory" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div className="modal-dialog">
+    <div className="modal-content">
+      <div className="modal-header bg-danger">
+        <h1 className="modal-title fs-5" id="exampleModalLabel">Delete Category</h1>
+        <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div className="modal-body">
+        
+        Are you sure you want to delete <b>{editData.name}</b> ?
+
+      </div>
+      <div className="modal-footer">
+      <button type="button" className="btn btn-danger"   data-bs-dismiss="modal" onClick={()=>deleteCategory(editData.id)}  >Delete</button>
+      <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
         
       </div>
     </div>

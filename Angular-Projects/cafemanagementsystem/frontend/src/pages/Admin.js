@@ -9,25 +9,16 @@ import ManageCategory from '../components/admin/ManageCategory'
 import Nav from '../components/admin/Nav'
 
 export default function Admin() {
-  const [menu, setMenu] = useState({dashboard:true});
+  const [currentPage, setCurrentPage] = useState(<Dashboard/>);
 
-  const clickMenu = (menu) => {
-      setMenu(menu)
-  }
+ 
   return (
     <>
    
     <div className='container-fluid d-flex ' style={{height:"92vh"}}>
-       <Nav clickMenu={clickMenu}/>
+       <Nav currentPage={setCurrentPage}/>
         <div className='contentContainer'>
-         {menu.dashboard && <Dashboard/>}
-         {menu.manageCategory && <ManageCategory/>}
-         {menu.manageUsers && <ManageUsers/>}
-         {menu.manageOrder && <ManageOrder/>}
-         {menu.manageProduct && <ManageProduct/>}
-         {menu.viewBill && <ViewBill/>}
-            
-          
+         {currentPage}
         </div>
 
     </div>
