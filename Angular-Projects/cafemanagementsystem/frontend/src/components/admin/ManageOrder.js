@@ -69,6 +69,8 @@ const createAbill = async ()=>{
     setCustomer({name:"", email:"", contact_number:0, payment_method:""});
     setOrders([]);
 }
+
+
   return (
     <>
      <div className='manageCategory d-flex p-3 justify-content-between shadow'>
@@ -109,7 +111,7 @@ const createAbill = async ()=>{
             <div className=' d-flex mt-3 center'>
                 <div className="inputbox d-flex flex-column justify-content-end">
                 <label className='fw-bold'>Category</label>
-                <select className="form-select form-select-sm" disabled={categories.length == 0} aria-label=".form-select-sm example" name='category' value={order.category} onChange={handleCatInput}>
+                <select className="form-select form-select-sm" disabled={categories.length === 0} aria-label=".form-select-sm example" name='category' value={order.category} onChange={handleCatInput}>
                     <option   defaultValue={true} >Choose a category</option>
                     {categories && categories.filter(cat=> products.some(prod => prod.category_id === cat.name))
                     .map(cat=><option key={cat._id} value={cat.name}>{cat.name}</option>)}
@@ -173,7 +175,7 @@ const createAbill = async ()=>{
                                       
                                         <a href="#" className="table-link fs-5 text-dark">
                                             <span className="fa-stack">
-                                            <i className="bi bi-trash" onClick={()=>setOrders(prev=> prev.filter(item=> item.product != order.product))}></i>
+                                            <i className="bi bi-trash" onClick={()=>setOrders(prev=> prev.filter(item=> item.product !== order.product))}></i>
                                             </span>
                                         </a>
                                         

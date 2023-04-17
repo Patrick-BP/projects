@@ -8,11 +8,11 @@ const OrderSchema = new mongoose.Schema({
     payment_method: String,
     total: Number,
     product_details:[{
-        name:String,
+        product:String,
         price: Number,
         total: Number,
         category: String,
-        quatity: Number
+        quantity: Number
 
     }],
     created_by: {type: mongoose.Schema.Types.ObjectId, ref:"users"}

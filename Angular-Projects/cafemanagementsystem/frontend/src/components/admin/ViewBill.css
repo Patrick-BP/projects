@@ -151,3 +151,8 @@ text-decoration:none;
   margin: 2px;
  
 }
+
+.modalCustom{
+  --bs-modal-width: 90% !important;
+  top:20% !important
+}
