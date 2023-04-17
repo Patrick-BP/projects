@@ -23,35 +23,3 @@ exports.addOrder = async (req, res) => {
 }
 };
 
-exports.updateOrder = async (req, res) => {
-    const data =req.body;
-    
-  try {
-     const result = await Order.updateOne({_id:req.params.order_id}, data);
-     res.status(200).json(new Response(false, "Changes were saved", result));
-    } catch (error) {
-      console.log(error.message);
-      res.status(500).json(new Response(true, "Updating Order Failed!", null));
-    }
-};
-
-exports.deleteOrder = async (req, res) => {
-  try {
-  const result =  await Order.findByIdAndDelete({_id:req.params.order_id});
-    res.status(200).json(new Response(false, "A Order was deleted", result));
-} catch (error) {
-  console.log(error.message);
-  res.status(500).json(new Response(true, "Deleting Order Failed!", null));
-}
-};
-
-exports.searchOrder = async (req, res) => {
-    const query = req.query.q
-    try {
-    const result =  await Order.find({$or:[{name:{$regex:query, $options:'i'}}]})
-      res.status(200).json(new Response(false, "A Order was deleted", result));
-  } catch (error) {
-    console.log(error.message);
-    res.status(500).json(new Response(true, "Deleting Order Failed!", null));
-  }
-  };

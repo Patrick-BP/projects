@@ -1,11 +1,21 @@
-import React from 'react'
-import './ViewBill.css'
+import React, { useEffect, useState } from 'react'
+import './ViewBill.css';
+import axios from 'axios';
+axios.defaults.baseURL = "http://localhost:5000/";
+
 export default function ViewBill() {
+    const [orders, setOrders] = useState([]);
+
+    const fetchData = async()=>{
+        const resp =  await axios.get('bill/all')
+    }
+    useEffect(()=>{
+
+    },[])
   return (
     <>
     <div className='manageCategory d-flex p-3 justify-content-between shadow'>
                <h6>View Bill</h6> 
-                <button className='btn btn-primary'><i className="bi bi-plus-circle-fill"></i> Add Product</button>
             </div>
             <div className='field p-4 mt-4 shadow'>
                 

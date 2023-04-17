@@ -6,9 +6,9 @@ axios.defaults.baseURL = "http://localhost:5000/";
 
 export default function ManageOrder() {
     const [orders, setOrders] = useState([]);
-    const [customer, setCustomer] = useState({name:"", email:"", Contact_number:0, payment_method:""});
-    const [order, setOrder] = useState({category:"", product:"", price:0, quantity:0, total:0})
-
+    const [customer, setCustomer] = useState({name:"", email:"", contact_number:0, payment_method:""});
+    const [order, setOrder] = useState({category:"", product:"", price:0, quantity:0, total:0});
+    
     const [categories, setCategories] = useState([]);
     const [products, setProductList] = useState([]);
 
@@ -32,14 +32,10 @@ export default function ManageOrder() {
         
     };
 
-
-
     const handleProdInput =(event)=> {
         const {value, name} = event.target;
         setProduct(products.find(prod=> prod.name === value));
         setOrder(prev=> ({...prev, [name]: value})); 
-      
-       
         
     }
     const handleCatInput = (event) => {
@@ -54,9 +50,7 @@ export default function ManageOrder() {
         if(order.quantity >1){
             console.log(order.quantity*order.price);
               setOrder(prev=> ({...prev, total: (order.quantity*order.price) }))
-        }
-      
-       
+        } 
     }
 
    
@@ -65,12 +59,21 @@ const addOrder = ()=>{
     setOrder({category:"", product:"", price:0, quantity:0, total:0});
     setProduct({})
 }
-
+ const handleCustomer = (event)=>{
+    const {value, name} = event.target;
+    setCustomer(prev=> ({...prev, [name]:value}));
+ }
+const createAbill = async ()=>{
+    
+    const resp = await axios.post('bill/add', {...customer, product_details:orders});
+    setCustomer({name:"", email:"", contact_number:0, payment_method:""});
+    setOrders([]);
+}
   return (
     <>
      <div className='manageCategory d-flex p-3 justify-content-between shadow'>
                <h6>Manage Order</h6> 
-                <button className='btn btn-primary'><i className="bi bi-printer-fill"></i> Submit & Get Bill</button>
+                <button className='btn btn-primary'type="button" onClick={createAbill}><i className="bi bi-printer-fill"></i> Submit & Get Bill</button>
             </div>
 
             <div className='tableContainer shadow   p-3 justify-content-between'>
@@ -78,23 +81,23 @@ const addOrder = ()=>{
             <div className=' d-flex mt-5 center'>
 
                 <div className="inputbox">
-                    <input type='text'  name="name" placeholder='Name*'/>
+                    <input type='text'  name="name" value={customer.name} onChange={handleCustomer} placeholder='Name*' required/>
                     
                 </div>
                 <div className="inputbox">
-                    <input type='email'  name="email" placeholder='Email*'/>
+                    <input type='email'  name="email" value={customer.email} onChange={handleCustomer} placeholder='Email*'required/>
                     
                 </div>
                 <div className="inputbox">
-                    <input type='phone'  name="phone" placeholder='Phone*'/>
+                    <input type='phone'  name="contact_number" value={customer.contact_number} onChange={handleCustomer} placeholder='Phone*' required/>
                     
                 </div>
                 <div className="inputbox">
-                    <select type="select">
-                        <option value="">Payment Method*</option>
-                        <option value="masterCard">Cash</option>
-                        <option value="masterCard">Debit Card</option>
-                        <option value="masterCard">Credit Card</option>
+                    <select type="select" name="payment_method" value={customer.payment_method} onChange={handleCustomer} required>
+                        <option defaultChecked>Payment Method*</option>
+                        <option value="cash">Cash</option>
+                        <option value="debit card">Debit Card</option>
+                        <option value="credit card">Credit Card</option>
                     </select>
                 </div>
         
@@ -186,10 +189,13 @@ const addOrder = ()=>{
                                     <td></td>
 
                                 </tr>}
-                                
-                                
-                                
-                                   
+                               {orders.length >0 && <tr className='fw-bolder fs-4 text-center'>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td>Total:</td>
+                                    <td >${orders.reduce((a,b)=> a + b.total, 0)}</td>
+                                </tr>}
                              
                             </tbody>
                         </table>

@@ -3,6 +3,7 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 const categoryRoute = require('./Routers/categoryRoute');
 const productRoute = require('./Routers/productRoute');
+const billRoute = require('./Routers/billRoute');
 const orderRoute = require('./Routers/orderRoute');
 const dataRoute = require('./Routers/dataRoute');
 
@@ -19,6 +20,7 @@ const PORT = process.env.PORT || 3000
 app.use('/category', categoryRoute);
 app.use('/product', productRoute);
 app.use('/order', orderRoute);
+app.use('/bill', billRoute);
 app.use('/data', dataRoute);
 
 const mongooseConnect = async ()=>{
