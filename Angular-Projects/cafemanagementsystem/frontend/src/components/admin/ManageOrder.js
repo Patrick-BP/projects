@@ -36,20 +36,28 @@ export default function ManageOrder() {
 
     const handleProdInput =(event)=> {
         const {value, name} = event.target;
-        setOrder(prev=> ({...prev, [name]: value, price:(product ? product.price : 0),  total:(prev.price*prev.quantity) })); 
+        setProduct(products.find(prod=> prod.name === value));
+        setOrder(prev=> ({...prev, [name]: value,   total:(prev.price*prev.quantity) })); 
         
     }
-const checkProd = (e) => {
-setProduct(products.find(prod=> prod.name === e.target.value));
-setOrder(prev=> ({...prev, total:(prev.price*prev.quantity) })); 
+    const handleCatInput = (event) => {
+        const {value, name} = event.target;
+        setOrder(prev=> ({...prev, [name]: value })); 
+    }
 
-}
+    const handleOrderInput = (event) => {
+        const {value, name} = event.target;
+        setOrder(prev=> ({...prev, [name]: value,   total:(prev.price*prev.quantity) })); 
+    }
+ 
+
+
    
 const calTotal = ()=>{
     setOrder(prev=> ({...prev, total:(prev.price*prev.quantity) })); 
 }
 
-    console.log(product);
+  console.log(product);
   console.log(order);
   return (
     <>
@@ -90,26 +98,27 @@ const calTotal = ()=>{
             <h6>Select Product:</h6> 
             <div className=' d-flex mt-5 center'>
                 <div className="inputbox">
-                <select className="form-select form-select-sm" disabled={categories.length == 0} aria-label=".form-select-sm example" name='category' value={order.category} onChange={handleProdInput}>
+                <select className="form-select form-select-sm" disabled={categories.length == 0} aria-label=".form-select-sm example" name='category' value={order.category} onChange={handleCatInput}>
                     <option   defaultValue={true} >Choose a category</option>
                     {categories && categories.filter(cat=> products.some(prod => prod.category_id === cat.name))
                     .map(cat=><option key={cat._id} value={cat.name}>{cat.name}</option>)}
                 </select>
                 </div>
                 <div className="inputbox">
-                <select className="form-select form-select-sm" aria-label=".form-select-sm example" disabled={!order.category} name='product' value={product?.name} onClick={checkProd} onChange={handleProdInput}>
-                <option   defaultValue={true} >Choose a product</option>
-                {products && products.filter(prod=> prod.category_id === order.category).map(prod=><option key={prod._id} value={prod.name}>{prod.name}</option>)}
-            </select>
+                <select className="form-select form-select-sm" aria-label=".form-select-sm example" disabled={!order.category} name='product' value={order.product } onChange={handleProdInput}>
+                    <option   defaultValue={true} >Choose a product</option>
+                    {products && products.filter(prod=> prod.category_id === order.category)
+                    .map(prod=><option key={prod._id} value={prod.name}>{prod.name}</option>)}
+                </select>
                 </div>
                 <div className="inputbox">
-                    <input type='numbert'  name="price" disabled  value={product?.price} onChange={handleProdInput} placeholder='Price'/>   
+                    <div>{product?.price}</div>   
                 </div>
                 <div className="inputbox">
-                    <input type='number'  name="quantity" value={order.quantity} onChange={handleProdInput} placeholder='Quantity*'/>  
+                    <input type='number' name="quantity" value={order.quantity} onChange={handleOrderInput} placeholder='Quantity*'/>  
                 </div>
                 <div className="inputbox d-flex">
-                 <b className='fs-4 mt-2'>$</b><input type='number'  name="total" onClick={calTotal}  disabled value={order.total } onChange={handleProdInput} placeholder='Total*'/>   
+                 <b className='fs-4 mt-2'>$</b><input type='number'  name="total" onClick={calTotal}  disabled value={order.total } onChange={handleOrderInput} placeholder='Total*'/>   
                 </div>
             </div>
             <div className='d-flex justify-content-between mt-4'>
