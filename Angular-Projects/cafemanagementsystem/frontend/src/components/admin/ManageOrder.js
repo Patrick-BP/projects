@@ -62,7 +62,7 @@ export default function ManageOrder() {
    
 const addOrder = ()=>{
     setOrders(prev=>([...prev,{...order, total:order.price * order.quantity }]));
-    setOrder({});
+    setOrder({category:"", product:"", price:0, quantity:0, total:0});
     setProduct({})
 }
 
@@ -103,34 +103,36 @@ const addOrder = ()=>{
             </div>
             <div className='tableContainer shadow   p-3 justify-content-between'>
             <h6>Select Product:</h6> 
-            <div className=' d-flex mt-5 center'>
-                <div className="inputbox">
+            <div className=' d-flex mt-3 center'>
+                <div className="inputbox d-flex flex-column justify-content-end">
+                <label className='fw-bold'>Category</label>
                 <select className="form-select form-select-sm" disabled={categories.length == 0} aria-label=".form-select-sm example" name='category' value={order.category} onChange={handleCatInput}>
                     <option   defaultValue={true} >Choose a category</option>
                     {categories && categories.filter(cat=> products.some(prod => prod.category_id === cat.name))
                     .map(cat=><option key={cat._id} value={cat.name}>{cat.name}</option>)}
                 </select>
                 </div>
-                <div className="inputbox">
+                <div className="inputbox d-flex flex-column justify-content-end">
+                <label className='fw-bold'>Product</label>
                 <select className="form-select form-select-sm" aria-label=".form-select-sm example" disabled={!order.category} name='product' value={order.product } onChange={handleProdInput}>
                     <option   defaultValue={true} >Choose a product</option>
                     {products && products.filter(prod=> prod.category_id === order.category)
                     .map(prod=><option key={prod._id} value={prod.name}>{prod.name}</option>)}
                 </select>
                 </div>
-                <div className="inputbox">
-                    <div>${product?.price}</div>   
+                <div className="inputbox d-flex flex-column justify-content-end">
+                <label className='fw-bold'>Price</label>
+                    <div className='fw-bold border-bottom border-2 border-dark-50'>${product?.price}</div>   
                 </div>
-                <div className="inputbox">
+                <div className="inputbox d-flex flex-column justify-content-end">
+                    <label className='fw-bold'>Quantity</label>
                     <input type='number' name="quantity" value={order.quantity} onChange={handleOrderInput} placeholder='Quantity*'/>  
                 </div>
-                <div className="inputbox d-flex">
-                 <b className='fs-4'>$</b> <div>{order.total ? order?.price * order.quantity  : 0} </div>   
-                </div>
+               
             </div>
             <div className='d-flex justify-content-between mt-4'>
-                <button className='btn btn-secondary' onClick={addOrder}>Add</button>
-                <div className='totalAmount'><i className="bi bi-currency-dollar"></i> Total amount:  {order.total ? order?.price * order.quantity : 0 }</div>
+                <button className='btn btn-primary' onClick={addOrder}>Add New Order</button>
+                
             </div>
             </div>
            
