@@ -5,9 +5,9 @@ import axios from 'axios';
 axios.defaults.baseURL = "http://localhost:5000/";
 
 export default function ManageOrder() {
-    const [orders, setorders] = useState([]);
+    const [orders, setOrders] = useState([]);
     const [customer, setCustomer] = useState({name:"", email:"", Contact_number:0, payment_method:""});
-    const [order, setOrder] = useState({category:"", product:"", price:0, quantity:1, total:0})
+    const [order, setOrder] = useState({category:"", product:"", price:0, quantity:0, total:0})
 
     const [categories, setCategories] = useState([]);
     const [products, setProductList] = useState([]);
@@ -37,7 +37,9 @@ export default function ManageOrder() {
     const handleProdInput =(event)=> {
         const {value, name} = event.target;
         setProduct(products.find(prod=> prod.name === value));
-        setOrder(prev=> ({...prev, [name]: value,   total:(prev.price*prev.quantity) })); 
+        setOrder(prev=> ({...prev, [name]: value})); 
+      
+       
         
     }
     const handleCatInput = (event) => {
@@ -47,18 +49,23 @@ export default function ManageOrder() {
 
     const handleOrderInput = (event) => {
         const {value, name} = event.target;
-        setOrder(prev=> ({...prev, [name]: value,   total:(prev.price*prev.quantity) })); 
+        setOrder(prev=> ({...prev, [name]: value }));  
+        setOrder(prev=> ({...prev, price: product.price }))
+        if(order.quantity >1){
+            console.log(order.quantity*order.price);
+              setOrder(prev=> ({...prev, total: (order.quantity*order.price) }))
+        }
+      
+       
     }
- 
-
 
    
-const calTotal = ()=>{
-    setOrder(prev=> ({...prev, total:(prev.price*prev.quantity) })); 
+const addOrder = ()=>{
+    setOrders(prev=>([...prev,{...order, total:order.price * order.quantity }]));
+    setOrder({});
+    setProduct({})
 }
 
-  console.log(product);
-  console.log(order);
   return (
     <>
      <div className='manageCategory d-flex p-3 justify-content-between shadow'>
@@ -112,18 +119,18 @@ const calTotal = ()=>{
                 </select>
                 </div>
                 <div className="inputbox">
-                    <div>{product?.price}</div>   
+                    <div>${product?.price}</div>   
                 </div>
                 <div className="inputbox">
                     <input type='number' name="quantity" value={order.quantity} onChange={handleOrderInput} placeholder='Quantity*'/>  
                 </div>
                 <div className="inputbox d-flex">
-                 <b className='fs-4 mt-2'>$</b><input type='number'  name="total" onClick={calTotal}  disabled value={order.total } onChange={handleOrderInput} placeholder='Total*'/>   
+                 <b className='fs-4'>$</b> <div>{order.total ? order?.price * order.quantity  : 0} </div>   
                 </div>
             </div>
             <div className='d-flex justify-content-between mt-4'>
-                <button className='btn btn-secondary  '>Add</button>
-                <div className='totalAmount'><i className="bi bi-currency-dollar"></i> Total amount:  {order.total }</div>
+                <button className='btn btn-secondary' onClick={addOrder}>Add</button>
+                <div className='totalAmount'><i className="bi bi-currency-dollar"></i> Total amount:  {order.total ? order?.price * order.quantity : 0 }</div>
             </div>
             </div>
            
@@ -152,16 +159,16 @@ const calTotal = ()=>{
                             <>{orders && orders.map(order=>{
                                     return (
                                         <tr className='tableText'>
-                                    <td>{order.name}</td>
-                                    <td> {order.name}</td>
-                                    <td> {order.name}</td>
-                                    <td>{order.name}</td>
-                                    <td>{order.name}</td>
+                                    <td>{order.product}</td>
+                                    <td> {order.category}</td>
+                                    <td> {order.price}</td>
+                                    <td>{order.quantity}</td>
+                                    <td>{order.total}</td>
                                     <td style={{width: "20%"}} className='d-flex justify-content-center w-100'>
                                       
                                         <a href="#" className="table-link fs-5 text-dark">
                                             <span className="fa-stack">
-                                            <i className="bi bi-trash"></i>
+                                            <i className="bi bi-trash" onClick={()=>setOrders(prev=> prev.filter(item=> item.product != order.product))}></i>
                                             </span>
                                         </a>
                                         
