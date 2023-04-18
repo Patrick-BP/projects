@@ -2,6 +2,11 @@ const express = require("express");
 const Response = require("../Model/ResponseObj");
 const Bill = require("../Model/orderModel");
 
+const fs = require('fs');
+const pdf = require('html-pdf');
+const pdfTemplate = require('../documents')
+
+
 exports.getAllBills = async (req, res) => {
   try {
     const result = await Bill.find({});
@@ -55,3 +60,18 @@ exports.searchBill = async (req, res) => {
     res.status(500).json(new Response(true, "Deleting Bill Failed!", null));
   }
   };
+
+
+  exports.generatePdf = async (req, res) => {
+   pdf.create(pdfTemplate(req.body),{}).toFile('result.pdf', (err)=>{
+    if(err){
+      res.send(Promise.reject()) ;
+    }else{
+      res.send(Promise.resolve()) ;
+    }
+   })
+  };
+
+  exports.fetchPdf = async (req, res) => {
+    res.sendFile(`${__dirname}/result.pdf`)
+   };

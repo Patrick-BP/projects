@@ -1,7 +1,8 @@
 import './ManageOrder.css'
 import React, { useState , useEffect} from 'react';
 import axios from 'axios';
- 
+import {saveAs} from 'file-saver';
+
 axios.defaults.baseURL = "http://localhost:5000/";
 
 export default function ManageOrder() {
@@ -63,11 +64,23 @@ const addOrder = ()=>{
     const {value, name} = event.target;
     setCustomer(prev=> ({...prev, [name]:value}));
  }
+
+ const createAndDownload = ()=>{
+    axios.post('/bill/create-pdf', customer)
+    .then(()=> axios.get('bill/fetch-pdf',{responseType:'blob'}))
+    .then((res)=>{
+        console.log(res.data)
+        const pdfBlod = new Blob([res.data], {type:"application/pdf"})
+        saveAs(pdfBlod, 'newPdf.pdf');
+    })
+ }
 const createAbill = async ()=>{
     
     const resp = await axios.post('bill/add', {...customer, product_details:orders});
     setCustomer({name:"", email:"", contact_number:0, payment_method:""});
     setOrders([]);
+    createAndDownload()
+
 }
 
 
