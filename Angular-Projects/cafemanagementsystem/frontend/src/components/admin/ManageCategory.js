@@ -40,6 +40,7 @@ const handleSearch = (event) => {
 
 const handleChanges = (event) => {
 const {value, name} = event.target;
+
 setEditData(prev=> ({...prev, [name]:value}));
 }
 
