@@ -10,7 +10,7 @@ export default function Home() {
 <input placeholder="Username" class="inputHome" name="text" type="text"/>
 <input placeholder="Username" class="inputHome" name="text" type="text"/>
 </div>
-<div>
+<div className='d-flex flex-column align-items-center'>
 <RoomCard/>
 <RoomCard/>
 <RoomCard/>
