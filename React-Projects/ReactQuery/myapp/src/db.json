@@ -1,0 +1,14 @@
+{
+  "posts": [
+    {
+      "id": 1,
+      "title": "JavaScript sw",
+      "body": " this is JavaScript"
+    },
+    {
+      "id": 3,
+      "title": "Angular ",
+      "body": " this is Angular"
+    }
+  ]
+}
