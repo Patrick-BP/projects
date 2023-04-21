@@ -4,7 +4,7 @@ import { Outlet } from 'react-router-dom'
 
 export default function Main() {
   return (
-   <div className='shadowstyle fullheight' >
+   <div className='' >
         <NavBar/>
         <div className='position-relative container'>
             <Outlet/>
