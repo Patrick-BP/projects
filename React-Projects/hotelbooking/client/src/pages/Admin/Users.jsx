@@ -1,11 +1,20 @@
 import React from 'react'
+import {useQuery} from 'react-query'
+import {getAllUsers} from '../../Apis/post'
 
 export default function Users() {
+
+  const {isLoading, isError, data:users, error} = useQuery({
+    queryKey:['Users'],
+    queryFn: getAllUsers 
+  })
+
+
   return (
     <div>
     <h3>Users</h3>
 
-<table class="table table-dark table-hover">
+<table className="table table-dark table-hover">
 <thead>
 <tr>
   
@@ -17,18 +26,17 @@ export default function Users() {
 </tr>
 </thead>
 <tbody>
-<tr>
-  <th scope="row">Mark</th>
-  <td>Mark</td>
-  <td>Otto</td>
-  
-</tr>
-<tr>
-  <th scope="row">Mark</th>
-  <td>Mark</td>
-  <td>Otto</td>
+{users && users.map(user=>{
+  return (
+      <tr key={user._id}>
+        <th scope="row">{user.fullname}</th>
+        <td>{user.email}</td>
+        <td>{user.isAdmin}</td>
+        
+      </tr>
+  )
+})}
 
-</tr>
 
 </tbody>
 </table>

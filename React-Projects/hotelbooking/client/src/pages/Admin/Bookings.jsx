@@ -5,7 +5,7 @@ export default function Bookings() {
     <div>
         <h3>Bookings</h3>
 
-<table class="table table-dark table-hover">
+<table className="table table-dark table-hover">
 <thead>
     <tr>
       
