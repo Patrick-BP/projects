@@ -1,10 +1,21 @@
 import React, { useState } from 'react'
 import './Home.css'
-import RoomCard from '../components/RoomCard'
+import RoomCard from '../components/RoomCard';
+import {QueryClient, useQuery} from 'react-query'
+import { getAllRooms } from '../Apis/room'
 
 export default function Home() {
   const [startType, setStartType] = useState({type:"text"});
-  const [endType, setEndType] = useState({type:"text"})
+  const [endType, setEndType] = useState({type:"text"});
+
+  const {isLoading, isError, data:rooms, error} = useQuery({
+    queryKey: ['rooms'],
+    queryFn: getAllRooms
+  })
+
+  if(isLoading)return "Loading..."; 
+  if(isError) return "Error:" + error.message; 
+  console.log(rooms);
   return (
     <div>
 <div className='d-flex justify-content-center'>
@@ -18,11 +29,11 @@ export default function Home() {
 </select>
 </div>
 <div className='d-flex flex-column align-items-center'>
-<RoomCard/>
-<RoomCard/>
-<RoomCard/>
-<RoomCard/>
-<RoomCard/>
+
+  {rooms && rooms.map(room=>{
+    return<RoomCard data={room}/>
+  })}
+
 
 </div>
 

@@ -1,11 +1,22 @@
 import React from 'react'
-
+import {QueryClient, useQuery} from 'react-query'
+import { getAllRooms } from '../../Apis/room'
 export default function Rooms() {
+
+
+  const {isLoading, isError, data:rooms, error} = useQuery({
+    queryKey: ['rooms'],
+    queryFn: getAllRooms
+  })
+
+  if(isLoading)return<div>Loading...</div>; 
+  if(isError) return<div>"Error:" + error.message</div>; 
+ 
   return (
     <div>
     <h3>Rooms</h3>
 
-<table class="table table-dark table-hover">
+<table className="table table-dark table-hover">
 <thead>
 <tr>
   
@@ -18,20 +29,15 @@ export default function Rooms() {
 </tr>
 </thead>
 <tbody>
-<tr>
-  <th scope="row">Mark</th>
-  <td>Mark</td>
-  <td>Otto</td>
-  <td>@mdo</td>
-  <td>@mdo</td>
+{rooms && rooms.map(room=>{
+return <tr key={room._id}>
+  <th scope="row">{room.name}</th>
+  <td>{room.type}</td>
+  <td>{room.rent_per_day}</td>
+  <td>{room.max_count}</td>
+  <td>{room.phone_number}</td>
 </tr>
-<tr>
-  <th scope="row">Mark</th>
-  <td>Mark</td>
-  <td>Otto</td>
-  <td>@mdo</td>
-  <td>@mdo</td>
-</tr>
+})}
 
 </tbody>
 </table>

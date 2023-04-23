@@ -5,7 +5,7 @@ import {getAllUsers} from '../../Apis/post'
 export default function Users() {
 
   const {isLoading, isError, data:users, error} = useQuery({
-    queryKey:['Users'],
+    queryKey:['users'],
     queryFn: getAllUsers 
   })
 
