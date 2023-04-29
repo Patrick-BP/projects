@@ -1,0 +1,63 @@
+.topMenu{
+  height: 60px;
+}
+.mainWraper{
+  height: 100vh;
+  
+}
+.container-fluid{
+  padding:0 !important
+}
+.logo{
+  margin-right: 10px;
+  margin-left:20px;
+  font-size: 50px;
+  color:#1666ce
+}
+.searchInput{
+  border-radius: 20px;
+  width: 75%;
+  background-color: rgb(235, 233, 233);
+  border: 0px;
+  margin-left: 20px;
+
+  outline: none;
+  padding-left: 20px;
+  height: 40px;
+}
+.menuItems{
+  font-size: 35px;
+ color: gray;
+ 
+}
+.menuItems:hover{
+ color: #1666ce;
+}
+.userLogo{
+  font-size: 50px;
+  color: #1666ce;
+  margin-right: 30px;
+}
+.menulist > li{
+  width: 100px;
+  padding: 10px;
+ 
+}
+.menulist > li:hover{
+  border-bottom: 4px solid #1666ce;
+
+}
+.menulist{
+  margin-top:15px;
+
+}
+.profilepic{
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  object-fit: cover;
+  margin-right: 25px;
+}
+.content{
+  background-color: #F0F2F5;
+}
