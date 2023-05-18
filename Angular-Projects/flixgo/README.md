@@ -5,6 +5,7 @@ Some of the Interesting  Features
 ## Authentication and authorization
 
 user and admin must be authentic and authorized to access below features
+(https://github.com/Patrick-BP/projects/blob/main/Angular-Projects/flixgo/login.png )
 <img src="https://github.com/Patrick-BP/projects/blob/main/Angular-Projects/flixgo/login.png" width="50%"/>
 
 ## Uploading new movies and poster
