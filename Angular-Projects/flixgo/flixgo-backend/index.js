@@ -18,7 +18,7 @@ const auth = require('./services/authentication');
 const checkRole =  require('./services/checkRole');
 const openRouter = require('./routers/openRouter');
 const RatingRouter = require('./routers/RantingRouter')
-
+const multerS3 = require('multer-s3')
 
 const app = express();
 
