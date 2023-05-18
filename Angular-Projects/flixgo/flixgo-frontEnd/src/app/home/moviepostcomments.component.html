@@ -1,0 +1,8 @@
+
+<form [formGroup]="form" (ngSubmit)="onsubmit()" class="form">
+    <div class="close-container">
+    <mat-icon class= "close-icon"  mat-dialog-close>close</mat-icon>
+</div><br>
+    <textarea id="text" name="text" formControlName="comment" class="form__textarea" placeholder="Add comment" required></textarea>
+    <button type="submit" class="form__btn" [disabled]="!form.valid">Send</button>
+</form>

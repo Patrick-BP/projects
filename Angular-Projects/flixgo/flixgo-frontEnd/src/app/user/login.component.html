@@ -1,0 +1,27 @@
+
+                <div class="sign__content">
+                    <!-- authorization form -->
+                    <form [formGroup]="form" (ngSubmit)="onsubmit()" class="sign__form">
+                        <a href="index.html" class="sign__logo">
+                            <img src="../../assets/img/logo.svg" alt="">
+                        </a>
+
+                        <div class="sign__group">
+                            <input type="text" class="sign__input" formControlName="email" placeholder="Email">
+                        </div>
+
+                        <div class="sign__group">
+                            <input type="password" class="sign__input" formControlName="password" placeholder="Password">
+                        </div>
+
+                       
+                        
+                        <button class="sign__btn" type="submit" [disabled]="!form.valid">Sign in</button>
+
+                        <span class="sign__text">Don't have an account? <a (click)="signupFunc()">Sign up!</a></span>
+
+                        <span class="sign__text"  (click)="forgotpasswordFunc()"><a>Forgot password?</a></span>
+                    </form>
+                    <!-- end authorization form -->
+                </div>
+           

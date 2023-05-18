@@ -1,0 +1,146 @@
+<div class="sign__content">
+
+  <form [formGroup]="movieform" class="sign__form" (ngSubmit)="submitMovie()">
+    <a href="index.html" class="sign__logo">
+      <img src="../../assets/img/logo.svg" alt="" />
+    </a>
+
+    <div class="row">
+      <div class="sign__group col-auto">
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" />
+
+          <mat-error *ngIf="movieform.controls.title.hasError('required')">
+            Title is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="sign__group col">
+        <mat-form-field appearance="fill">
+          <mat-label>Director</mat-label>
+          <input matInput formControlName="director" />
+          <mat-error *ngIf="movieform.controls.director.hasError('required')">
+            Director is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="sign__group col">
+        <mat-form-field appearance="fill">
+          <mat-label>Release Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="releaseDate"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error
+            *ngIf="movieform.controls.releaseDate.hasError('required')"
+          >
+            Release Date is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row justify-content-center">
+      <div class="sign__group col-auto">
+        <mat-form-field appearance="fill">
+          <mat-label>Genre</mat-label>
+          <mat-select
+            name="fieldName"
+            ngDefaultControl
+            formControlName="genre"
+            [formControl]="selectGenre"
+            multiple
+          >
+            <mat-option
+              *ngFor="let topping of selectGenreList"
+              [value]="topping"
+              >{{ topping }}</mat-option
+            >
+          </mat-select>
+          <mat-error *ngIf="movieform.controls.genre.hasError('required')">
+            Genre is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="sign__group col">
+        <mat-form-field appearance="fill">
+          <mat-label>Quality</mat-label>
+          <mat-select formControlName="quality">
+            <mat-option
+              *ngFor="let quality of selectQuality"
+              [value]="quality.value"
+            >
+              {{ quality.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="movieform.controls.quality.hasError('required')">
+            quality is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="sign__group col">
+        <mat-form-field appearance="fill">
+          <mat-label>Country</mat-label>
+          <mat-select formControlName="country">
+            <mat-option
+              *ngFor="let country of selectCountry"
+              [value]="country.value"
+            >
+              {{ country.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="movieform.controls.country.hasError('required')">
+            country is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row" style="width: 100%">
+      <div class="sign__group col-4">
+        <mat-form-field appearance="fill">
+          <mat-label>Language</mat-label>
+          <mat-select formControlName="language">
+            <mat-option
+              *ngFor="let language of selectLanguage"
+              [value]="language.value"
+            >
+              {{ language.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="movieform.controls.language.hasError('required')">
+            language is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="sign__group col-8">
+        <mat-form-field appearance="fill">
+          <mat-label>Description</mat-label>
+          <textarea
+            matInput
+            placeholder="Description..."
+            formControlName="overview"
+          ></textarea>
+          <mat-error *ngIf="movieform.controls.overview.hasError('required')">
+            Description is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <button class="sign__btn" type="submit" [disabled]="!movieform.valid">
+      Add</button
+    ><br />
+    <button class="sign__btn" mat-raised-button mat-dialog-close>close</button>
+  </form>
+  
+</div>

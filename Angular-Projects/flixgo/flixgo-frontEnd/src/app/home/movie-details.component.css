@@ -1,0 +1,97 @@
+
+.showmore{
+	font-weight: bold;
+	color:#FF5873 ;
+}
+
+
+::ng-deep .mat-tooltip {
+	background-color: #FF596A;
+	font-size: 12px;
+	
+  }
+
+   .deletebtn{
+	float:right !important
+  }
+
+  .loadMore{
+	
+	border-radius: 5px;
+	padding: 5px 10px;
+	
+	background-color: #FF596A;
+	color: aliceblue;
+  }
+  .loadMore:disabled{
+	display: none;
+  }
+  .loadMoreDiv{
+	display: flex;
+	justify-content: center;
+  }
+
+  .btn button{
+	font-size: 13px!important;
+	border: 0.5px solid #706e6e;
+	border-radius: 4px;
+	color: #989090  !important;
+	padding: 0 5px;
+	display: inline-flex;
+	margin-top: 8px;
+  }
+  .btn button:hover{
+	
+	color: #d2cece  !important;
+	
+  }
+.material-icons {
+	font-size: 17px !important;
+	height: 0px!important;
+}
+
+/* rating */
+.rating-list li {
+	float: right;
+	color: #ddd;
+	
+  
+  }
+  
+  .rating-list li:hover,
+  .rating-list li:hover ~ li {
+	color: #ffd700;
+  }
+  
+  .rating-list {
+	display: inline-block;
+	list-style: none;
+	margin-top: 10px;
+	margin-left: 10px;
+  }
+  .rating-list li.selected {
+    color: #ffd700;
+}
+.selectedRate{
+	font-size: 13px!important;
+	border: 0.5px solid #706e6e;
+	border-radius: 4px;
+	color: #989090  !important;
+	padding: 0 5px;
+	display: inline-flex;
+	margin-top: 8px;
+	font-weight: bold;
+	position: absolute;
+    top: -0px;
+  }
+  .rating-list li{
+	margin-right: -4px !important;
+  }
+  .card__year{
+	color:#ddd; 
+	margin: 0 !important;
+	font-size:small !important;
+  }
+  .card__title{
+	margin: 0 !important;
+  }

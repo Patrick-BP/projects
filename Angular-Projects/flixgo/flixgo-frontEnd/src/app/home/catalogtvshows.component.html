@@ -1,0 +1,140 @@
+<!-- page title -->
+<section
+  class="section section--first section--bg"
+  data-bg="assets/img/section/section.jpg"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section__wrap">
+          <!-- section title -->
+          <h1 class="section__title" style="font-size: 3rem">tvshows</h1>
+          <!-- end section title -->
+
+          <!-- breadcrumb -->
+
+          <!-- end breadcrumb -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end page title -->
+
+<!-- filter -->
+
+<div class="filter">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="filter__content">
+          <form [formGroup]="form" (ngSubmit)="onsubmit()">
+            <div class="filter__items">
+              <!-- filter item -->
+              <div>
+                <label for="genre">Genre:</label>
+
+                <select name="genre" id="genre" formControlName="genre">
+                  <option value="Action">Action</option>
+                  <option value="Comedy">Comedy</option>
+                  <option value="Family">Family</option>
+                  <option value="Drama">Drama</option>
+                  <option value="Romance">Romance</option>
+                </select>
+              </div>
+              <div>
+                <label for="country">Country:</label>
+
+                <select name="country" id="country" formControlName="country">
+                  <option value="United States">United States</option>
+                  <option value="France">France</option>
+                  <option value="China">China</option>
+                </select>
+              </div>
+              <div>
+                <label for="Language">Language:</label>
+                <select
+                  name="Language"
+                  id="Language"
+                  formControlName="language"
+                >
+                  <option value="English">English</option>
+                  <option value="French">French</option>
+                  <option value="Chinese">Chinese</option>
+                </select>
+              </div>
+
+              <div>
+                <label for="releaseDate">Year:</label>
+                <input
+                  type="range"
+                  value="2023"
+                  min="2000"
+                  max="2023"
+                  oninput="this.nextElementSibling.value = this.value"
+                  formControlName="year"
+                />
+                <output style="color: aliceblue">2023</output>
+              </div>
+
+        
+
+              <!-- end filter item -->
+            </div>
+
+            <!-- filter btn -->
+            <button class="filter__btn" type="submit">apply filter</button>
+            <!-- end filter btn -->
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- end filter -->
+<!-- catalog -->
+
+<div class="catalog" >
+ 
+  <div class="container">
+    <h1 style="color: aliceblue;" *ngIf="tvshowsList.length <=0">No Tv-Shows Found</h1>
+    <div class="row" >
+      <!-- card -->
+      <div
+        class="col-6 col-sm-4 col-lg-3 col-xl-2"
+        *ngFor="let tvshow of tvshowsList"
+      >
+        <div class="card">
+          <div class="card__cover">
+            <img
+              src="{{tvshow.thumbnail || 'assets/img/poster.png'}}"
+              alt=""
+            />
+            <a
+              [routerLink]="['', 'user', 'tvshow', tvshow._id]"
+              class="card__play"
+            >
+              <i class="icon ion-ios-play"></i>
+            </a>
+          </div>
+          <div class="card__content">
+            <h3 class="card__title">
+              <a [routerLink]="['', 'user', 'tvshow', tvshow._id]">{{
+                tvshow.title
+              }}</a>
+            </h3>
+            <h4 class="card__year">{{ tvshow.releaseDate | date : "yyyy" }}</h4>
+
+            <span class="card__category">
+              <a href="#">{{ tvshow.genre }}</a>
+            </span>
+            <!-- <span class="card__rate"><i class="icon ion-ios-star"></i>{{tvshow.rating}}</span> -->
+          </div>
+        </div>
+      </div>
+      <!-- end card -->
+    </div>
+  </div>
+</div>
+<!-- end catalog -->

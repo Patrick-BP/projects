@@ -1,0 +1,27 @@
+.card__year {
+  color: #ddd;
+  margin: 0 !important;
+  font-size: small !important;
+}
+.card__title {
+  margin: 0 !important;
+}
+
+
+
+.loadMore{
+	
+	border-radius: 5px;
+	padding: 5px 10px;
+	
+	background-color: #FF596A;
+	color: aliceblue;
+  }
+  .loadMore:disabled{
+	display: none;
+  }
+  .loadMoreDiv{
+	display: flex;
+	justify-content: center;
+  width: 100%;
+  }

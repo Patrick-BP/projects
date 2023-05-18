@@ -1,0 +1,50 @@
+
+                <div class="sign__content">
+                    <!-- registration form -->
+                    <form [formGroup]="form" class="sign__form" (ngSubmit)="onsubmit()">
+                        <a href="index.html" class="sign__logo" >
+                            <img src="../../assets/img/logo.svg" alt="">
+                        </a>
+
+                        <div class="sign__group">
+                            <input type="text" class="sign__input" placeholder="First Name" formControlName="firstname">
+                            <div  class="text-warning" *ngIf="(form.controls.firstname?.touched && form.controls.firstname?.invalid) || form.controls.firstname?.dirty">
+                                <span *ngIf= "form.controls.firstname.errors?.['required']">First Name is required</span>
+                                <span *ngIf="form.controls.firstname.errors?.['pattern']">First name is invalid</span>
+                            </div>
+                        </div>
+                        <div class="sign__group">
+                            <input type="text" class="sign__input" placeholder="Last Name" formControlName="lastname">
+                            <div class="text-warning" *ngIf="(form.controls.lastname.touched && form.controls.lastname?.invalid)|| form.controls.lastname?.dirty">
+                                <span  *ngIf= "form.controls.lastname.errors?.['required']">Last Name is required.</span>
+                                <span *ngIf="form.controls.lastname.errors?.['pattern']">Last Name field is invalid.</span>
+                            </div>
+                        </div>
+
+                        <div class="sign__group">
+                            <input type="email" class="sign__input" placeholder="Email" formControlName="email">
+                            <div class="text-warning"  *ngIf="(form.controls.email.touched && form.controls.email.invalid)|| form.controls.email?.dirty">
+                                <span *ngIf= "form.controls.email.errors?.['required']">Email is required.</span>
+                                <span *ngIf="form.controls.email.errors?.['pattern']">Email is invalid.</span>
+                            </div>
+                        </div>
+
+                        <div class="sign__group">
+                            <input type="password" class="sign__input" placeholder="Password" formControlName="password">
+                            <div class="text-warning" *ngIf="(form.controls.password.touched && form.controls.password.invalid)|| form.controls.password.dirty">
+                                <span  *ngIf= "form.controls.password.errors?.['required']">Password is required.</span>
+                                <span *ngIf="form.controls.password.errors?.['minLength']">Your Password must be at least 5 Characters long.</span>
+                                <span *ngIf="form.controls.password.errors?.['pattern']">Your password must contains at least one uppercase,<br>one lowercase and one number.</span>
+                            </div>
+                        </div>
+
+                       
+                        
+                        <button class="sign__btn" type="submit" [disabled]="!form.valid">Sign up</button><br>
+                        <button class="sign__btn" mat-raised-button mat-dialog-close>close</button>
+
+                        <span class="sign__text">Already have an account? <a (click)="signinFunc()">Sign in!</a></span>
+                    </form>
+                    <!-- registration form -->
+                </div>
+        

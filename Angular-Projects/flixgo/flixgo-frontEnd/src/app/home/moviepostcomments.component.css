@@ -1,0 +1,14 @@
+.close-icon{
+    margin-left: auto !important;
+    order:2 !important;
+    font-weight: bolder !important;
+    background-color: #28282E;
+    border: 1px solid #f80707;
+    color: rgb(252, 16, 16);
+  
+
+}
+.close-container{
+    display: flex;
+    width: 100%;
+}

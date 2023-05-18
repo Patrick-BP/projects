@@ -1,0 +1,439 @@
+<!-- details -->
+<section class="section details">
+  <!-- details background -->
+  <div class="details__bg" data-bg="img/home/home__bg.jpg"></div>
+  <!-- end details background -->
+
+  <!-- details content -->
+  <div class="container">
+    <div class="row">
+      <!-- title -->
+      <div class="col-12">
+        <h1 class="details__title">{{ movieDetails.title }}</h1>
+      </div>
+      <!-- end title -->
+
+      <!-- content -->
+      <div class="col-12 col-xl-6">
+        <div class="card card--details">
+          <div class="row">
+            <!-- card cover -->
+            <div class="col-12 col-sm-4 col-md-4 col-lg-3 col-xl-5">
+              <div class="card__cover">
+                <img
+                  src="{{movieDetails.thumbnail || '../assets/img/poster.png'}}"
+                  alt=""
+                />
+              </div>
+            </div>
+            <!-- end card cover -->
+
+            <!-- card content -->
+            <div class="col-12 col-sm-8 col-md-8 col-lg-9 col-xl-7">
+              <div class="card__content">
+                <div class="card__wrap">
+                  <span *ngIf="movieDetails.rating" class="card__rate"
+                    ><i class="icon ion-ios-star"></i
+                    >{{ movieDetails.rating }}</span
+                  >
+
+                  <ul class="card__list">
+                    <li>{{ movieDetails.quality }}</li>
+                    <li>16+</li>
+                  </ul>
+                </div>
+
+                <ul class="card__meta">
+                  <li>
+                    <span>Genre:</span> <a href="#">{{ movieDetails.genre }}</a>
+                  </li>
+                  <li>
+                    <span>Release year:</span>
+                    {{ movieDetails.releaseDate | date : "yyyy" }}
+                  </li>
+                  <li><span>Language</span> {{ movieDetails.language }}</li>
+                  <li>
+                    <span>Country:</span>
+                    <a href="#">{{ movieDetails.country }}</a>
+                  </li>
+                </ul>
+
+                <div class="card__description card__description--details">
+                  <p *ngIf="!showMore">
+                    {{ movieDetails.overview | truncate }}
+                  </p>
+                  <div *ngIf="showMore && movieDetails.overview.length > 200">
+                    <p>{{ movieDetails.overview }}</p>
+                  </div>
+                  <button
+                    *ngIf="movieDetails.overview.length > 200"
+                    (click)="showMore = !showMore"
+                    class="showmore"
+                  >
+                    {{ showMore ? "Read Less" : "Read More" }}
+                  </button>
+                </div>
+              </div>
+            </div>
+            <!-- end card content -->
+          </div>
+        </div>
+      </div>
+      <!-- end content -->
+
+      <!-- player -->
+      <div class="col-12 col-xl-6" style="height: fit-content"> -->
+        
+       <div (click)="playVideo()"><img src="assets/img/player.png"/></div>
+       
+        <ul class="details__share-list">
+          <li class="facebook btn">
+            <button *ngIf="!isfav" (click)="addToFav()">
+              <mat-icon>favorite</mat-icon> Add to list
+            </button>
+
+            <button *ngIf="isfav" (click)="removeToFav()">
+              <mat-icon>indeterminate_check_box</mat-icon> remove to list
+            </button>
+          </li>
+
+          <li class="instagram btn">
+            <button (click)="rateBtn()">
+              <mat-icon>rate_review</mat-icon> Rate this Movie
+            </button>
+            <div *ngIf="rateShown && isRated" style="color: #ff596a">
+              You have rated this movie already
+            </div>
+            <div class="row" style="float: right" *ngIf="rateShown && !isRated">
+              <div class="col-sm-12">
+                <ul
+                  class="list-inline rating-list"
+                  style="display: inline-block"
+                >
+                  <li
+                    *ngFor="let star of stars"
+                    (click)="countStar(star)"
+                    [ngClass]="{ selected: star <= selectedValue }"
+                  >
+                    <mat-icon>star</mat-icon>
+                  </li>
+                </ul>
+                <span class="selectedRate">{{ selectedValue || 0 }}/10</span>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </div> -->
+      <!-- end player -->
+
+      <div class="col-12">
+        <div class="details__wrap">
+          <!-- availables -->
+
+          <!-- end availables -->
+
+          <!-- share -->
+          <div class="details__share">
+            <span class="details__share-title">Share with friends:</span>
+
+            <ul class="details__share-list">
+              <li class="facebook">
+                <a href="#"><i class="icon ion-logo-facebook"></i></a>
+              </li>
+              <li class="instagram">
+                <a href="#"><i class="icon ion-logo-instagram"></i></a>
+              </li>
+              <li class="twitter">
+                <a href="#"><i class="icon ion-logo-twitter"></i></a>
+              </li>
+              <li class="vk">
+                <a href="#"><i class="icon ion-logo-vk"></i></a>
+              </li>
+            </ul>
+          </div>
+          <!-- end share -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- end details content -->
+</section>
+<!-- end details -->
+
+<!-- content -->
+<section class="content">
+  <div class="content__head">
+    <div class="container">
+      <div class="row">
+        <div class="col-12">
+          <!-- content title -->
+          <h2 class="content__title">Discover</h2>
+          <!-- end content title -->
+
+          <!-- content tabs nav -->
+          <ul
+            class="nav nav-tabs content__tabs"
+            id="content__tabs"
+            role="tablist"
+          >
+            <li class="nav-item">
+              <a
+                class="nav-link active"
+                data-toggle="tab"
+                href="#tab-1"
+                role="tab"
+                aria-controls="tab-1"
+                aria-selected="true"
+                >Comments</a
+              >
+            </li>
+          </ul>
+          <!-- end content tabs nav -->
+
+          <!-- content mobile tabs nav -->
+          <div class="content__mobile-tabs" id="content__mobile-tabs">
+            <div
+              class="content__mobile-tabs-btn dropdown-toggle"
+              role="navigation"
+              id="mobile-tabs"
+              data-toggle="dropdown"
+              aria-haspopup="true"
+              aria-expanded="false"
+            >
+              <input type="button" value="Comments" />
+              <span></span>
+            </div>
+
+            <div
+              class="content__mobile-tabs-menu dropdown-menu"
+              aria-labelledby="mobile-tabs"
+            >
+              <ul class="nav nav-tabs" role="tablist">
+                <li class="nav-item">
+                  <a
+                    class="nav-link active"
+                    id="1-tab"
+                    data-toggle="tab"
+                    href="#tab-1"
+                    role="tab"
+                    aria-controls="tab-1"
+                    aria-selected="true"
+                    >Comments</a
+                  >
+                </li>
+              </ul>
+            </div>
+          </div>
+          <!-- end content mobile tabs nav -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row">
+      <div class="col-12 col-lg-8 col-xl-8">
+        <!-- content tabs -->
+        <div class="tab-content" id="myTabContent">
+          <div
+            class="tab-pane fade show active"
+            id="tab-1"
+            role="tabpanel"
+            aria-labelledby="1-tab"
+          >
+            <div class="row">
+              <!-- comments -->
+              <div class="col-12">
+                <h2 style="color: white">{{ commentsList.length }} Comments</h2>
+                <form [formGroup]="form" (ngSubmit)="onsubmit()" class="form">
+                  <textarea
+                    id="text"
+                    name="text"
+                    formControlName="comment"
+                    class="form__textarea"
+                    placeholder="Add comment"
+                    required
+                  ></textarea>
+                  <button
+                    type="submit"
+                    class="form__btn"
+                    [hidden]="!form.valid"
+                  >
+                    Send
+                  </button>
+                </form>
+                <br />
+                <div class="comments">
+                  <ul
+                    class="comments__list"
+                    *ngFor="let comment of commentsList.slice(0, currentPage)"
+                  >
+                    <li class="comments__item">
+                      <div class="comments__autor">
+                        <img
+                          class="comments__avatar"
+                          src="{{comment.userId.imgUrl || 'assets/img/profilepic.png'}}"
+                          alt=""
+                        />
+                        <span class="comments__name"
+                          >{{ comment.userId.firstname }}
+                          {{ comment.userId.lastname }}</span
+                        >
+                        <span class="comments__time">{{
+                          comment.createdAt | date : "medium"
+                        }}</span>
+                      </div>
+                      <div class="comments__text">
+                        <div>
+                          <button
+                            *ngIf="comment.userId._id == userId"
+                            type="button"
+                            (click)="deleteComment(comment._id)"
+                            class="deletebtn"
+                            matTooltip="Delete this Comment."
+                            matTooltipPosition="above"
+                          >
+                            <mat-icon
+                              style="color: #ff596a; border: 1px solid #ff596a"
+                              >close</mat-icon
+                            >
+                          </button>
+                        </div>
+
+                        <p>{{ comment.comment }}</p>
+                      </div>
+                      <div class="comments__actions">
+                        <div class="comments__rate">
+                          <button type="button" (click)="showRepliesFunc()">
+                            {{ comment.replies.length }}
+                            <ng-container
+                              *ngIf="comment.replies.length > 1; else reply"
+                              >Replies</ng-container
+                            >
+                          </button>
+                          <ng-template #reply>Reply</ng-template>
+                        </div>
+
+                        <button type="button" (click)="addReply(comment._id)">
+                          <i class="icon ion-ios-share-alt"></i>Reply
+                        </button>
+                      </div>
+                      <br />
+
+                      <ul *ngFor="let reply of comment.replies">
+                        <li
+                          class="comments__item comments__item--answer"
+                          *ngIf="showReplies"
+                        >
+                          <div class="comments__autor">
+                            <img
+                              class="comments__avatar"
+                              src="{{reply.userId.imgUrl || 'assets/img/profilepic.png'}}"
+                              alt=""
+                            />
+                            <span class="comments__name">{{
+                              reply.userId.firstname
+                            }}</span>
+                            <span class="comments__time">{{
+                              reply.createdAt | date : "medium"
+                            }}</span>
+                          </div>
+
+                          <div>
+                            <button
+                              *ngIf="reply.userId._id == userId"
+                              type="button"
+                              class="position:none !importent"
+                              (click)="deleteReply(comment._id, reply._id)"
+                              class="deletebtn"
+                              matTooltip="Delete this Comment."
+                              matTooltipPosition="above"
+                            >
+                              <mat-icon
+                                style="
+                                  color: #ff596a;
+                                  border: 1px solid #ff596a;
+                                "
+                                >close</mat-icon
+                              >
+                            </button>
+                          </div>
+                          <p class="comments__text">{{ reply.message }}</p>
+                        </li>
+                      </ul>
+                    </li>
+                  </ul>
+                  <div class="loadMoreDiv">
+                    <button
+                      class="loadMore"
+                      (click)="loadMore()"
+                      [disabled]="currentPage >= commentsList.length"
+                    >
+                      Load More
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <!-- end comments -->
+            </div>
+          </div>
+        </div>
+        <!-- end content tabs -->
+      </div>
+
+      <!-- sidebar -->
+      <div class="col-12 col-lg-4 col-xl-4">
+        <div class="row">
+          <!-- section title -->
+          <div class="col-12">
+            <h2 class="section__title section__title--sidebar">
+              You may also like...
+            </h2>
+          </div>
+          <!-- end section title -->
+
+          <!-- card -->
+          <div
+            class="col-6 col-sm-4 col-lg-6"
+            *ngFor="let movie of mayLike | slice : 0 : 4; trackBy: indexTracker"
+          >
+            <div class="card">
+              <div class="card__cover">
+                <img
+                  src="{{movie.thumbnail || 'assets/img/poster.png'}}"
+                  alt=""
+                />
+                <a
+                  [routerLink]="['', 'user', 'movie', movie._id]"
+                  target="_blank"
+                  class="card__play"
+                >
+                  <i class="icon ion-ios-play"></i>
+                </a>
+              </div>
+              <div class="card__content">
+                <h3 class="card__title">
+                  <a [routerLink]="['', 'user', 'movie', movie._id]">{{
+                    movie.title
+                  }}</a>
+                </h3>
+                <h4 class="card__year">
+                  {{ movie.releaseDate | date : "yyyy" }}
+                </h4>
+                <span class="card__category">
+                  <a href="#">{{ movie.genre }}</a>
+                </span>
+                <span class="card__rate"
+                  ><i class="icon ion-ios-star"></i>{{ movie.rating }}</span
+                >
+              </div>
+            </div>
+          </div>
+          <!-- end card -->
+        </div>
+      </div>
+      <!-- end sidebar -->
+    </div>
+  </div>
+</section>
+<!-- end content -->

@@ -1,0 +1,40 @@
+<div class="formStyle">
+  <div class="close-container">
+    <mat-icon class="close-icon" mat-dialog-close>close</mat-icon>
+  </div>
+  <form
+    [formGroup]="episodeform"
+    class="form-style"
+    (ngSubmit)="submitEpisode()"
+  >
+    <h2>Add new Episode Info</h2>
+    <mat-form-field appearance="fill">
+      <mat-label>Title</mat-label>
+      <input matInput formControlName="title" />
+      <mat-error *ngIf="episodeform.controls.title.hasError('required')">
+        Title is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Season</mat-label>
+      <input matInput type="number" formControlName="season" />
+      <mat-error *ngIf="episodeform.controls.season.hasError('required')">
+        Director is required
+      </mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Episode</mat-label>
+      <input type="number" matInput formControlName="episode" />
+
+      <mat-error *ngIf="episodeform.controls.episode.hasError('required')">
+        Title is required
+      </mat-error>
+    </mat-form-field>
+
+    <button class="sign__btn" type="submit" [disabled]="!episodeform.valid">
+      Add Episode</button
+    ><br />
+  </form>
+</div>

@@ -1,0 +1,117 @@
+<div class="formStyle">
+  <form [formGroup]="tvform" class="form-style" (ngSubmit)="submitTvshow()">
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field appearance="fill">
+          <mat-label>Title</mat-label>
+          <input matInput formControlName="title" />
+
+          <mat-error *ngIf="tvform.controls.title.hasError('required')">
+            Title is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field appearance="fill">
+          <mat-label>Director</mat-label>
+          <input matInput formControlName="director" />
+          <mat-error *ngIf="tvform.controls.director.hasError('required')">
+            Director is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field appearance="fill">
+          <mat-label>Release Date</mat-label>
+          <input
+            matInput
+            [matDatepicker]="picker"
+            formControlName="releaseDate"
+          />
+          <mat-datepicker-toggle matSuffix [for]="picker">
+            <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+          </mat-datepicker-toggle>
+          <mat-datepicker #picker></mat-datepicker>
+          <mat-error *ngIf="tvform.controls.releaseDate.hasError('required')">
+            Release Date is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field appearance="fill">
+          <mat-label>Genre</mat-label>
+          <mat-select
+            formControlName="genre"
+            name="fieldName"
+            ngDefaultControl
+            [formControl]="selectGenre"
+            multiple
+          >
+            <mat-option
+              *ngFor="let topping of selectGenreList"
+              [value]="topping"
+              >{{ topping }}</mat-option
+            >
+          </mat-select>
+          <mat-error *ngIf="tvform.controls.genre.hasError('required')">
+            Genre is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="col-6">
+        <mat-form-field appearance="fill">
+          <mat-label>Country</mat-label>
+          <mat-select formControlName="country">
+            <mat-option
+              *ngFor="let country of selectCountry"
+              [value]="country.value"
+            >
+              {{ country.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="tvform.controls.country.hasError('required')">
+            country is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+      <div class="col-6">
+        <mat-form-field appearance="fill">
+          <mat-label>Language</mat-label>
+          <mat-select formControlName="language">
+            <mat-option
+              *ngFor="let language of selectLanguage"
+              [value]="language.value"
+            >
+              {{ language.viewValue }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="tvform.controls.language.hasError('required')">
+            language is required
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <mat-form-field appearance="fill">
+      <mat-label>Description</mat-label>
+      <textarea
+        matInput
+        placeholder="Description..."
+        formControlName="overview"
+      ></textarea>
+      <mat-error *ngIf="tvform.controls.overview.hasError('required')">
+        Description is required
+      </mat-error>
+    </mat-form-field>
+
+    <button class="sign__btn" type="submit" [disabled]="!tvform.valid">
+      Save Changes</button
+    ><br />
+  </form>
+</div>

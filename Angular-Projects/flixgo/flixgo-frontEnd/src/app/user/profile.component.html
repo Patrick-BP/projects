@@ -1,0 +1,54 @@
+<br><br><br><br><br><br>
+
+
+<div class="container">
+    <div class="row">
+        <div class="col-3">
+            <div class="d-flex flex-column align-items-center text-center rightside ">
+              
+                <img  class="rounded-circle " [src]="profilepic">
+                <span class="text-white">{{userInfo.firstname}} {{userInfo.lastname}}</span>
+                <span class="text-white">{{userInfo.email}}</span>
+                <span> </span><br><br>
+                <label for="file-upload" class="custom-file-upload">
+                  <mat-icon >cloud_upload</mat-icon>  Upload photo
+              </label>
+              <input id="file-upload" type="file"  (change)="uploadPicFunc($event)" accept=".jpg, .png, .jpeg"/>
+              <br>
+              <button class="btn" (click)="deleteProfile()"><mat-icon class="">delete</mat-icon>Delete Account</button>
+              
+            </div>
+
+        </div>
+        <div class="col-9">
+
+            <div class="form">
+   
+                <div class="subtitle">Edit profile</div>
+                <form [formGroup]="form" (ngSubmit)="onsubmit()">
+                <div class="input-container ic1">
+                  <input id="firstname" class="input" formControlName ="firstname" type="text" placeholder=" " />
+                  <div class="cut"></div>
+                  <label for="firstname" class="placeholder">First name</label>
+                </div>
+                <div class="input-container ic2">
+                  <input id="lastname" class="input" formControlName="lastname" type="text" placeholder=" " />
+                  <div class="cut"></div>
+                  <label for="lastname" class="placeholder">Last name</label>
+                </div>
+                <div class="input-container ic2">
+                  <input id="email" class="input" formControlName="email"  type="text" placeholder=" " />
+                  <div class="cut cut-short"></div>
+                  <label for="email" class="placeholder">Email</label>
+                </div>
+                <br>
+                <button class="header__sign-in" type="submit" style="margin-left: 5px;">
+                    <span>Save changes</span>
+                  </button>
+                </form>
+              </div>
+            
+        </div>
+    </div>
+    
+</div><br>

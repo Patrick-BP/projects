@@ -1,0 +1,71 @@
+<!-- page title -->
+<section
+  class="section section--first section--bg bg"
+  data-bg="assets/img/section/section.jpg"
+>
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
+        <div class="section__wrap">
+          <!-- section title -->
+          <h1 class="section__title" style="font-size: 3rem">My PlayList</h1>
+          <!-- end section title -->
+
+          <!-- breadcrumb -->
+
+          <!-- end breadcrumb -->
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<!-- end page title -->
+
+<!-- filter -->
+
+<!-- end filter -->
+<br /><br />
+<!-- catalog -->
+<div class="catalog">
+  <div class="container">
+    <h1 style="color:aliceblue">Your PLayList is Empty</h1>
+    <div class="row">
+      <!-- card -->
+      <div
+        class="col-6 col-sm-4 col-lg-3 col-xl-2"
+        *ngFor="let list of playList"
+      >
+        <div class="card">
+          <div class="card__cover">
+            <img
+              src="{{list.movieId.thumbnail || 'assets/img/poster.png'}}"
+              alt=""
+            />
+            <a
+              [routerLink]="['', 'user', 'movie', list.movieId._id]"
+              class="card__play"
+            >
+              <i class="icon ion-ios-play"></i>
+            </a>
+          </div>
+          <div class="card__content">
+            <h3 class="card__title">
+              <a href="#">{{ list.movieId.title }} </a>
+            </h3>
+            <h4 class="card__year">
+              {{ list.movieId.releaseDate | date : "yyyy" }}
+            </h4>
+            <span class="card__category">
+              <a href="#">{{ list.movieId.genre }}</a>
+            </span>
+            <span class="card__rate"
+              ><i class="icon ion-ios-star"></i>{{ list.movieId.rating }}</span
+            >
+          </div>
+        </div>
+      </div>
+      <!-- end card -->
+    </div>
+  </div>
+</div>
+<!-- end catalog -->

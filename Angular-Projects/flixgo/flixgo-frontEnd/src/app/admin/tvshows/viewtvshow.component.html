@@ -1,0 +1,126 @@
+<div class="container bg-dark">
+  <div class="close-container">
+    <mat-icon class="close-icon" mat-dialog-close>close</mat-icon>
+  </div>
+
+  <div class="row">
+    <div class="col-12">
+      <h1 class="details__title">{{ tvshowDetails.title }}</h1>
+    </div>
+
+    <div class="col-12 col-xl-5">
+      <div class="card card--details">
+        <div class="row">
+          <div class="col-12 col-sm-4 col-md-4 col-lg-3 col-xl-5">
+            <div class="card__cover">
+              <img
+                src="{{tvshowDetails.thumbnail || 'assets/img/poster.png'}}"
+                alt=""
+              />
+              <form>
+                <label for="file-upload" class="custom-file-upload">
+                  <mat-icon>cloud_upload</mat-icon> Upload image
+                </label>
+                <input
+                  id="file-upload"
+                  class="poster"
+                  type="file"
+                  (change)="uploadImg($event, tvshowDetails._id)"
+                />
+              </form>
+            </div>
+          </div>
+
+          <div class="col-12 col-sm-8 col-md-8 col-lg-9 col-xl-7">
+            <div class="card__content">
+              <div class="card__wrap">
+                <span class="card__rate"
+                  ><i class="icon ion-ios-star"></i>8.4</span
+                >
+              </div>
+
+              <ul class="card__meta">
+                <li>
+                  <span>Genre:</span> <a href="#">{{ tvshowDetails.genre }}</a>
+                </li>
+                <li>
+                  <span>Release year:</span>
+                  {{ tvshowDetails.releaseDate | date : "yyyy" }}
+                </li>
+                <li>
+                  <span>Country:</span>
+                  <a href="#">{{ tvshowDetails.country }}</a>
+                </li>
+                <li><span>Language:</span> {{ tvshowDetails.language }}</li>
+              </ul>
+
+              <div class="card__description card__description--details">
+                {{
+                  tvshowDetails.overview.length > 400
+                    ? (tvshowDetails.overview | slice : 0 : 400) + "..."
+                    : tvshowDetails.overview
+                }}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-10 col-xl-7">
+      <div class="accordionn-wrapper">
+        <div class="accordionn" *ngFor="let season of episodes; let i = index">
+          <input type="radio" name="radio-a" id="check{{ i + 1 }}" checked />
+          <label class="accordionn-label" for="check{{ i + 1 }}"
+            >Season {{ i + 1 }}</label
+          >
+          <div class="accordionn-content">
+            <table class="accordion__list">
+              <thead>
+                <tr>
+                  <th>#</th>
+                  <th>Title</th>
+                  <th>Status</th>
+                  <th>Upload</th>
+                  <th>Delete</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                <tr
+                  *ngFor="
+                    let episode of season | orderBy : 'episode';
+                    let i = index;
+                    trackBy: indexTracker
+                  "
+                >
+                  <th>{{ i + 1 }}</th>
+                  <td>{{ episode.title }}</td>
+                  <td>
+                    <span *ngIf="!episode.videourl" style="color: brown"
+                      >No video File</span
+                    >
+                    <span *ngIf="episode.videourl">uploaded</span>
+                  </td>
+                  <td>
+                    <input
+                      name="{{ episode._id }}"
+                      type="file"
+                      (change)="uploadVideo($event, episode._id)"
+                    />
+                  </td>
+                  <td>
+                    <mat-icon (click)="deleteepis(episode._id)">clear</mat-icon>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+
+      
+    </div>
+  </div>
+</div>
+
