@@ -7,7 +7,7 @@ Some of the Interesting  Features
 user and admin must be authentic and authorized to access below features
 <img src="https://github.com/Patrick-BP/projects/blob/main/Angular-Projects/flixgo/login.png" width="50%"/>
 
-## Uploading new movies and poster (as admin)
+## Uploading new movies and poster
 
 Admin can add movies/tv-shows and manage uses 
 <img src="https://github.com/Patrick-BP/projects/blob/main/Angular-Projects/flixgo/uploadmovie.png" width="50%"/>
