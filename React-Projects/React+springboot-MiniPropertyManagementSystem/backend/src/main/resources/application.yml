@@ -1,0 +1,15 @@
+server:
+  port: 8088
+
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/recipesdb
+    username: root
+    password: 0808656825
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    hibernate:
+      ddl-auto: update
+
+api:
+  version: v1

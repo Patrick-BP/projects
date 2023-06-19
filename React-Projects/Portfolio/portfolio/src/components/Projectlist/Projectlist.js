@@ -21,7 +21,7 @@ function Projectlist() {
                 isBlog={false}
                 title="Social Media App"
                 description="simular to facebook user can add/delete a post, follow/unfollow friends, see how is online"
-                ghLink=""
+                ghLink="https://socialmedia-bp.netlify.app"
                 technologies={["react", "nodejs", "mongodb","html","css"]}
               />
             </Col>
@@ -32,7 +32,7 @@ function Projectlist() {
                 isBlog={false}
                 title="Goal Tracker"
                 description="Olx-clone builds with react js. using firebase as a backend and deploying in firebase. Olx-Clone is a potential classified advertisement website that categorizes objects in a user-friendly manner & displays them as advertisements.. Classifieds can be posted that involve selling, and buying using React-router, context, react hooks."
-                ghLink=""
+                ghLink="https://goals-tracker-fe.netlify.app"
                 technologies={["angular", "nodejs", "mongodb","html","css"]}
               />
             </Col>
@@ -43,7 +43,7 @@ function Projectlist() {
                 isBlog={false}
                 title="GoFlix"
                 description="This project is a simplified front-end clone of Netflix. It was created with React js. It uses TMDB (The Movie Data Base ) API and uses the Axios tool. Users can click movie images with embedded YouTube trailers or related videos about the movie."
-                ghLink=""
+                ghLink="https://flixgo-fe.netlify.app"
                 technologies={["angular","materialui", "nodejs", "mongodb","html"]}
               />
             </Col>

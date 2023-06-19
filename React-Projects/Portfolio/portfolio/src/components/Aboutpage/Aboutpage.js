@@ -10,8 +10,15 @@ function Aboutpage() {
                 <Row className='textbackground'>
                     <Col md={7} >
                         <h3 className='aboutmetext'>About <span>Me</span></h3>
-                        <p className='aboutdetails'>I'm a self-taught Front End developer from India. I build websites with a focus on providing the experience for everyone using them and responsiveness. Curious to learn more about developing scalable distribution systems, love problem solving, and care about writing and maintainable code. A responsive design makes your website accessible to all users, regardless of their devices.
-                        </p>
+                        <p className='aboutdetails'> 
+                        I am an accomplished full stack developer with a deep enthusiasm for crafting robust front and back-end applications. 
+                        With an unwavering drive to thrive in the dynamic and constantly evolving tech industry, I eagerly seek an environment 
+                        where I can collaborate with other exceptional engineers.
+
+                        My expertise lies in my ability to swiftly acquire new skills and programming languages, tackle complex problem-solving challenges,
+                         and seamlessly collaborate with team members. My genuine passion for working alongside others fuels my desire to continuously learn 
+                         and innovate, consistently seeking novel approaches to problem-solving.                        
+                         </p>
                         <ul className='skilllist'>
                             <Row>
                                 <h3>Skills</h3>
