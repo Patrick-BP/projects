@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
+import java.time.LocalDateTime;
 import java.util.List;
 @Service
 public class PropertyService implements IPropertyService{
@@ -32,6 +33,7 @@ public class PropertyService implements IPropertyService{
     @Override
     public void save(@RequestBody PropertyRequest request) {
         var property = new Property();
+        property.setAddress(new Address());
         mapRequestToProperty(property, request);
         propertyRepository.save(property);
     }

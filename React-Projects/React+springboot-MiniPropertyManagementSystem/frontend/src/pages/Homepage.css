@@ -9,6 +9,7 @@
     border: 1px solid #ccc;
     border-radius: 5px;
     padding: 20px;
+    cursor: pointer;
   }
 
   .property img {
@@ -23,4 +24,12 @@
   .property p {
     margin-top: 5px;
     color: #777;
+  }
+
+  .listofpropertiesLink{
+    width: 100%;
+    display: flex;
+    justify-content: end;
+    padding: 5px;
+    color: red !important;
   }

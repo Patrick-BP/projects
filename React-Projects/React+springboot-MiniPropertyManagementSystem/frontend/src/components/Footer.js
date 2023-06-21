@@ -52,11 +52,11 @@ function Footer() {
         <h4>Login</h4>
           <form className="" role="form">
         <div className="form-group">
-          <label className="sr-only" for="exampleInputEmail2">Email address</label>
+          <label className="sr-only" htmlFor="exampleInputEmail2">Email address</label>
           <input type="email" className="form-control" id="exampleInputEmail2" placeholder="Enter email" />
         </div>
         <div className="form-group">
-          <label className="sr-only" for="exampleInputPassword2">Password</label>
+          <label className="sr-only" htmlFor="exampleInputPassword2">Password</label>
           <input type="password" className="form-control" id="exampleInputPassword2" placeholder="Password" />
         </div>
         <div className="checkbox">
@@ -70,7 +70,7 @@ function Footer() {
         <div className="col-sm-6">
           <h4>New User Sign Up</h4>
           <p>Join today and get updated with all the properties deal happening around.</p>
-          <button type="submit" className="btn btn-info"  onclick="window.location.href='register.php'">Join Now</button>
+          <button type="submit" className="btn btn-info"  >Join Now</button>
         </div>
 
       </div>
