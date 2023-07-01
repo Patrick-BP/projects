@@ -7,11 +7,11 @@ import com.patrick.recipes.domain.request.AddressRequest;
 import com.patrick.recipes.domain.request.PropertyRequest;
 import com.patrick.recipes.domain.response.PropertyResponse;
 import com.patrick.recipes.repository.PropertyRepository;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.RequestBody;
 
-import java.time.LocalDateTime;
 import java.util.List;
 @Service
 public class PropertyService implements IPropertyService{
@@ -20,6 +20,9 @@ public class PropertyService implements IPropertyService{
     PropertyRepository propertyRepository;
 
     PropertyResponse propertyResponse;
+
+    @Autowired
+    ModelMapper modelMapper;
     @Override
     public Property getPropertyById(int id) {
         return propertyRepository.findById(id).get();
@@ -33,7 +36,6 @@ public class PropertyService implements IPropertyService{
     @Override
     public void save(@RequestBody PropertyRequest request) {
         var property = new Property();
-        property.setAddress(new Address());
         mapRequestToProperty(property, request);
         propertyRepository.save(property);
     }
@@ -57,7 +59,7 @@ public class PropertyService implements IPropertyService{
         property.getAddress().setStreet(request.street());
         property.getAddress().setCity(request.city());
         property.getAddress().setState(State.valueOf(request.state()));
-        property.getAddress().setZipcode(request.zipCode());
+        property.getAddress().setZipCode(request.zipCode());
         propertyRepository.save(property);
     }
 

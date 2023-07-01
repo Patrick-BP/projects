@@ -3,7 +3,10 @@ package com.patrick.recipes.controller;
 import com.patrick.recipes.domain.Property;
 import com.patrick.recipes.domain.request.AddressRequest;
 import com.patrick.recipes.domain.request.PropertyRequest;
+import com.patrick.recipes.domain.response.PropertyDTO;
+import com.patrick.recipes.domain.response.UserDTO;
 import com.patrick.recipes.service.PropertyService;
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.repository.query.Param;
 import org.springframework.http.HttpStatus;
@@ -17,10 +20,15 @@ public class PropertyController {
 
     @Autowired
     PropertyService propertyService;
+    @Autowired
+    ModelMapper modelMapper;
 
     @GetMapping("/{id}")
-    public Property getPropertyById(@PathVariable("id") int propertyId){
-    return propertyService.getPropertyById(propertyId);
+    public PropertyDTO getPropertyById(@PathVariable("id") int propertyId){
+        var propertyDto = modelMapper.map(propertyService.getPropertyById(propertyId), PropertyDTO.class);
+        var userDto = modelMapper.map(propertyService.getPropertyById(propertyId).getOwner(), UserDTO.class);
+        propertyDto.setOwner(userDto);
+        return propertyDto;
     }
 
     @GetMapping
