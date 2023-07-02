@@ -4,8 +4,9 @@ const {Schema} = mongoose
 
 const PostSchema = new Schema({
     tilte: String,
-    except: String,
-    category: {type:  ref:},
+    excerpt: String,
+    permalink: String,
+    categoryId: {type: Schema.Types.ObjectId,  ref:'category'},
     content: String,
     imgPath: String
 }, {

@@ -3,22 +3,47 @@ const Post = require('../Models/postModel')
 const {ObjectId} = require('mongodb')
 
 
+
+
 exports.getAllPosts = async (req, res)=>{
-    res.json("all posts");
+    try{
+        response = await Post.find();
+        res.status(201).json(response);
+    }catch(err){
+        res.status(500).json(response);
+    }
+    
 };
 
 exports.save = async (req, res)=>{
     try{
+        await req.files.file.mv(`${__dirname}/uploads/${req.files.file.name}`)
         const result = await new Post(req.body).save();
         res.status(200).json({error: false, message:null, data: result});
 
     }catch(err){
-        res.status(500).json({error: true, message: err.massage, data:null});
+        res.status(500).json({error: true, message: err.message, data:null});
     }
 
 };
 
 exports.getPostById = async(req, res)=>{
-    res.json("post");  
+
+    try{
+        const response = await Post.findById(req.params.id);
+        res.status(200).json({error: false, message:null, data: response});
+    }catch(err){
+        res.status(500).json({error: true, message: err.massage, data:null});
+    }
+    
+};
+
+exports.updatePostById = async(req, res)=>{
+    try{
+        const response = await Post.findOneAndUpdate({_id:req.params.id}, req.body);
+        res.status(200).json({error: false, message:"post updated successfuly", data: response});
+    }catch(err){
+        res.status(500).json({error: true, message: err.massage, data:null});
+    }
 
 };

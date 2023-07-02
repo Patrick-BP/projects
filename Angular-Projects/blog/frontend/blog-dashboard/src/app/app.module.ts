@@ -13,6 +13,26 @@ import { AllPostComponent } from './posts/all-post/all-post.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule} from '@angular/common/http';
+// import { MatDialogModule } from '@angular/material/dialog';
+import {
+  NgxUiLoaderModule,
+  NgxUiLoaderConfig,
+  SPINNER,
+  PB_DIRECTION,
+} from 'ngx-ui-loader';
+
+const ngxUiLoaderConfig: NgxUiLoaderConfig = {
+  text: 'Loading...',
+  textColor: '#FFFFFF',
+  textPosition: 'center-center',
+  pbColor: '#FF5969',
+  bgsColor: '#FF5969',
+  fgsColor: '#FF5969',
+  fgsType: SPINNER.threeStrings,
+  fgsSize: 100,
+  pbDirection: PB_DIRECTION.leftToRight,
+  pbThickness: 5,
+};
 
 @NgModule({
   declarations: [
@@ -23,6 +43,7 @@ import { HttpClientModule} from '@angular/common/http';
     CategoriesComponent,
     NewPostComponent,
     AllPostComponent,
+    // MatConfirmDialogComponent,
   ],
   imports: [
     FormsModule,
@@ -30,10 +51,13 @@ import { HttpClientModule} from '@angular/common/http';
     AppRoutingModule,
     AngularEditorModule,
     HttpClientModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxUiLoaderModule,
+
     
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  exports:[]
 })
 export class AppModule { }

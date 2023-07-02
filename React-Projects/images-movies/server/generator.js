@@ -5,16 +5,16 @@ const app = express()
 app.use(expressFileupload({
 limits: { fileSize: 50 * 1024 * 1024 },
 abortOnLimit: true,
-}))
+}));
 
 app.post('/uploadFile', async (req, res) => {
 console.log(req.files.file)
 await req.files.file.mv(`${__dirname}/uploads/${req.files.file.name}`)
 res.send('Uploaded')
-})
+});
 
 
-let busboy = require('connect-busboy')
+let busboy = require('connect-busboy');
 
 app.use(busboy());
 
