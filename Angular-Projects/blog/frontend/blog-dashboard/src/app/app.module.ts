@@ -13,14 +13,16 @@ import { AllPostComponent } from './posts/all-post/all-post.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule} from '@angular/common/http';
-// import { MatDialogModule } from '@angular/material/dialog';
+import { StorageModule} from '@angular/fire/storage';
+import { PostService } from './services/post.service';
 import {
   NgxUiLoaderModule,
   NgxUiLoaderConfig,
   SPINNER,
   PB_DIRECTION,
 } from 'ngx-ui-loader';
-
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment.prod';
 const ngxUiLoaderConfig: NgxUiLoaderConfig = {
   text: 'Loading...',
   textColor: '#FFFFFF',
@@ -43,7 +45,7 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     CategoriesComponent,
     NewPostComponent,
     AllPostComponent,
-    // MatConfirmDialogComponent,
+ 
   ],
   imports: [
     FormsModule,
@@ -53,10 +55,10 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     HttpClientModule,
     ReactiveFormsModule,
     NgxUiLoaderModule,
-
-    
+    StorageModule,
+    AngularFireModule.initializeApp(environment.firebaseConfig),
   ],
-  providers: [],
+  providers: [PostService],
   bootstrap: [AppComponent],
   exports:[]
 })

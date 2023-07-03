@@ -17,7 +17,6 @@ exports.getAllPosts = async (req, res)=>{
 
 exports.save = async (req, res)=>{
     try{
-        await req.files.file.mv(`${__dirname}/uploads/${req.files.file.name}`)
         const result = await new Post(req.body).save();
         res.status(200).json({error: false, message:null, data: result});
 

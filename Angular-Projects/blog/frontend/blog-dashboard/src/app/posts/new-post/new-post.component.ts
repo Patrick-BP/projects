@@ -2,6 +2,7 @@ import { Component, OnInit, inject } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { CategoryService } from 'src/app/services/category.service';
+import { PostService } from 'src/app/services/post.service';
 import { ICategory } from 'src/app/shared/category.interface';
 import { IPost } from 'src/app/shared/post.interface';
 @Component({
@@ -26,7 +27,8 @@ get fc(){
 categories!: ICategory[];
 
   imgSrc?: any =  'https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg';
-  constructor(private categoryService: CategoryService ) { }
+  selectedImg!: any;
+  constructor(private categoryService: CategoryService, private postservive: PostService ) { }
 
 
   refreshList() {
@@ -48,11 +50,11 @@ categories!: ICategory[];
       this.imgSrc = e.target?.result;
     }
 
-    reader.readAsDataURL($event.target.files[0])
+    reader.readAsDataURL($event.target.files[0]);
+    this.selectedImg = $event.target.files[0];
   }
   onsubmit(){
-    console.log('permalinkInput: ', this.postForm.get('permalink')?.value);
-    console.log(this.postForm.value);
+    
     const postData: IPost = {
       title: this.postForm.value.title,
       permalink: this.postForm.get('permalink')?.value,
@@ -62,5 +64,12 @@ categories!: ICategory[];
       content: this.postForm.value.content,
       status: 'new'
     }
+    this.postservive.savePost(this.selectedImg, postData).subscribe({
+      next:(res)=>{
+        console.log('data saved');
+      },
+      error:(error)=>{},
+      complete:()=>{}
+    })
   }
 }
