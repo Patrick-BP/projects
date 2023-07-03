@@ -8,7 +8,11 @@ const PostSchema = new Schema({
     permalink: String,
     categoryId: {type: Schema.Types.ObjectId,  ref:'category'},
     content: String,
-    imgPath: String
+    imgPath: String,
+    isFeatured:{type: Boolean, default:false} ,
+    views: {type: Number, default:0},
+    status: String,
+    
 }, {
     versionKey: false,
     timestamps: true
