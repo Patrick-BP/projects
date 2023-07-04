@@ -13,7 +13,7 @@ export class PostService {
 
 
  save(postData: IPost){
-  return this.httpClient.post<{error: String, message: String
+  return this.httpClient.post<{error: String, message: string
   }>(environment.apiUrl+'/posts/new', postData)
  }
 

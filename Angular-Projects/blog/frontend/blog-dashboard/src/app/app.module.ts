@@ -15,6 +15,11 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule} from '@angular/common/http';
 import { StorageModule} from '@angular/fire/storage';
 import { PostService } from './services/post.service';
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+
+
 import {
   NgxUiLoaderModule,
   NgxUiLoaderConfig,
@@ -57,6 +62,9 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     NgxUiLoaderModule,
     StorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
+    CommonModule,
+    BrowserAnimationsModule, 
+    ToastrModule.forRoot(), 
   ],
   providers: [PostService],
   bootstrap: [AppComponent],
