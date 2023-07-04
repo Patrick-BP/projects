@@ -1,35 +1,36 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { AngularFireStorage } from '@angular/fire/compat/storage';
 import { IPost } from '../shared/post.interface';
 import { environment } from 'src/environments/environment';
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class PostService {
 
-  constructor(private httpClient: HttpClient, private storage: AngularFireStorage) { }
+  constructor(private httpClient: HttpClient) { }
 
 
+ save(postData: IPost){
+  return this.httpClient.post<{error: String, message: String
+  }>(environment.apiUrl+'/posts/new', postData)
+ }
 
- 
-  savePost(selectedImage: any, postData: IPost){
-    const filePath = `postIMG/${Date.now()}`;
-   
-    this.storage.upload(filePath, selectedImage).then(()=>{
-      this.storage.ref(filePath).getDownloadURL().subscribe(URL=>{
-        postData.imgPath = URL;
-      })
-     
-    })
+getAllPosts(){
+  return this.httpClient.get<IPost[]>(environment.apiUrl+`/posts`)
+}
 
-    return this.httpClient.post<{
-      error: String,
-      message: String
-    }>(environment.apiUrl+'/posts/new', postData)
-  }
+getPost(postId: string){
+  return this.httpClient.get<{error:string, message:string, data:IPost}>(environment.apiUrl+`/posts/${postId}`)
+}
 
-  
 
+updatePost(post: IPost, postid?: string){
+  return this.httpClient.patch<{error:string, message:string, data:IPost}>(environment.apiUrl+`/posts/${postid}`, post)
+}
+
+deletePost(postid: string){
+  return this.httpClient.delete<{error:string, message:string, data:IPost}>(environment.apiUrl+`/posts/${postid}`)
+}
 }

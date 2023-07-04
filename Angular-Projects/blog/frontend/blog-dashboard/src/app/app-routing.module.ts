@@ -9,7 +9,8 @@ const routes: Routes = [
   {path:'', component: DashboardComponent},
   {path: 'categories' , component: CategoriesComponent},
   {path: 'posts' , component: AllPostComponent },
-  {path: 'posts/new' , component: NewPostComponent}
+  {path: 'posts/new' , component: NewPostComponent},
+  {path: 'posts/new/:id' , component: NewPostComponent}
 
 
 ];

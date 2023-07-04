@@ -7,10 +7,10 @@ const {ObjectId} = require('mongodb')
 
 exports.getAllPosts = async (req, res)=>{
     try{
-        response = await Post.find();
+        response = await Post.find().populate('categoryId');
         res.status(201).json(response);
     }catch(err){
-        res.status(500).json(response);
+        res.status(500).json(err.message);
     }
     
 };
@@ -44,5 +44,14 @@ exports.updatePostById = async(req, res)=>{
     }catch(err){
         res.status(500).json({error: true, message: err.massage, data:null});
     }
+}
+
+exports.deletePostByid = async(req, res)=>{
+        try{
+            const response = await Post.findByIdAndDelete(req.params.id);
+            res.status(200).json({error: false, message:"post updated successfuly", data: response});
+        }catch(err){
+            res.status(500).json({error: true, message: err.massage, data:null});
+        }    
 
 };

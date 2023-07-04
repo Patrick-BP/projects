@@ -19,10 +19,10 @@
                     <table class="table row-border hover">
                         <thead>
                             <tr>
-                                <td>No</td>
+                                
                                 <td>Post Image</td>
                                 <td>Title</td>
-                                <td>Except</td>
+                                <td>Excerpt</td>
                                 <td>Category</td>
                                 <td>Date</td>
                                 <td>Actions</td>
@@ -30,16 +30,19 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>Firebase</td>
-                                <td>Firebase</td>
-                                <td>Firebase</td>
-                                <td>Firebase</td>
-                                <td>Firebase</td>
+                            <tr *ngFor='let post of postsList, let i = index'>
+                                
+                                <td class="imgtd"><img class="img-fluid img-thumbnail" src={{post.imgPath}} alt=""></td>
+                                <td class="titletd">{{post.title}}</td>
+                                <td class="excerpttd">{{post.excerpt}}</td>
+                                <td>{{post.categoryId?.name}}</td>
+                                <td>{{post.createdAt|date:'MM-dd-yyyy'}}</td>
                                 <td>
-                                    <button class="btn btn-sm btn-warning">Edit</button>
-                                    <button class="btn btn-sm btn-danger ml-2">Delete</button>
+                                    <i class="fas fa-pen text-success iconStyle" title="Edit" (click)="linkToEdit(post._id)"></i>
+                                    <i class="fas fa-trash text-danger iconStyle" title="Delete" (click)="deleteById(post._id)"></i> 
+                                    <button class="btn btn-success ml-2 featuredBtn" *ngIf="!post.isFeatured" (click)="featuredById(post.isFeatured, post._id)">Featured</button>
+                                    <button class="btn btn-danger ml-2 featuredBtn" *ngIf="post.isFeatured" (click)="featuredById(post.isFeatured, post._id)">Remove Featured</button>
+                                    
                                 </td>
                             </tr>
                             

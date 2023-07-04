@@ -3,7 +3,7 @@ const mongoose = require ('mongoose')
 const {Schema} = mongoose
 
 const PostSchema = new Schema({
-    tilte: String,
+    title: String,
     excerpt: String,
     permalink: String,
     categoryId: {type: Schema.Types.ObjectId,  ref:'category'},

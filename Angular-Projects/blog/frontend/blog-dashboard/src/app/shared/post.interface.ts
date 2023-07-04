@@ -1,7 +1,8 @@
 export interface IPost {
+    _id?: string,
     title?: string,
     permalink?: string,
-    categoryId?: string,
+    categoryId?: any
     imgPath?: string,
     excerpt?: string,
     content?: string,
