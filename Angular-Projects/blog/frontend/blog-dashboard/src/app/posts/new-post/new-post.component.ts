@@ -7,7 +7,7 @@ import { ICategory } from 'src/app/shared/category.interface';
 import { IPost } from 'src/app/shared/post.interface';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import {ActivatedRoute, Router} from '@angular/router';
-import { ToastrService } from 'ngx-toastr';
+
 
 @Component({
   selector: 'app-new-post',
@@ -44,7 +44,7 @@ postToEdit!: IPost
     private storage: AngularFireStorage,
     private route: ActivatedRoute,
     private router: Router ,
-    private toastr: ToastrService
+   
      ) { }
 
 
@@ -116,7 +116,7 @@ postToEdit!: IPost
        
         this.postservive.updatePost(postData, this.postId).subscribe({
               next:(res)=>{
-                this.toastr.success(res.message);
+                
               },
               error:(error)=>{
                 console.log(error);
@@ -152,7 +152,7 @@ postToEdit!: IPost
        
         this.postservive.save(postData).subscribe({
               next:(res)=>{
-                this.toastr.success(res.message);
+                
               },
               error:(error)=>{
                 console.log(error);

@@ -15,31 +15,17 @@ import { AngularEditorModule } from '@kolkov/angular-editor';
 import { HttpClientModule} from '@angular/common/http';
 import { StorageModule} from '@angular/fire/storage';
 import { PostService } from './services/post.service';
+
+
+
+import { AngularFireModule } from '@angular/fire/compat';
+import { environment } from 'src/environments/environment.prod';
+
 import { CommonModule } from '@angular/common';
-import { BrowserAnimationsModule} from '@angular/platform-browser/animations';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 
 
-import {
-  NgxUiLoaderModule,
-  NgxUiLoaderConfig,
-  SPINNER,
-  PB_DIRECTION,
-} from 'ngx-ui-loader';
-import { AngularFireModule } from '@angular/fire/compat';
-import { environment } from 'src/environments/environment.prod';
-const ngxUiLoaderConfig: NgxUiLoaderConfig = {
-  text: 'Loading...',
-  textColor: '#FFFFFF',
-  textPosition: 'center-center',
-  pbColor: '#FF5969',
-  bgsColor: '#FF5969',
-  fgsColor: '#FF5969',
-  fgsType: SPINNER.threeStrings,
-  fgsSize: 100,
-  pbDirection: PB_DIRECTION.leftToRight,
-  pbThickness: 5,
-};
 
 @NgModule({
   declarations: [
@@ -59,12 +45,13 @@ const ngxUiLoaderConfig: NgxUiLoaderConfig = {
     AngularEditorModule,
     HttpClientModule,
     ReactiveFormsModule,
-    NgxUiLoaderModule,
     StorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     CommonModule,
     BrowserAnimationsModule, 
-    ToastrModule.forRoot(), 
+    BrowserAnimationsModule, // required animations module
+    ToastrModule.forRoot() 
+
   ],
   providers: [PostService],
   bootstrap: [AppComponent],

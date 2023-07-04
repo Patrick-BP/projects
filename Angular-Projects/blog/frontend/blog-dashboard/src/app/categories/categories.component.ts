@@ -3,6 +3,7 @@ import { CategoryService } from '../services/category.service';
 import { NgxUiLoaderService } from 'ngx-ui-loader';
 import { ICategory } from '../shared/category.interface';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-categories',
@@ -19,7 +20,8 @@ export class CategoriesComponent implements OnInit {
   constructor(
     private categoryService: CategoryService, 
     private ngxLoader: NgxUiLoaderService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
+    private toastr: ToastrService
   ) {
     this.categoryForm = this.formBuilder.group({
       category: ['', Validators.required]
@@ -50,6 +52,7 @@ export class CategoriesComponent implements OnInit {
           this.categoryForm.reset();
           this.refreshList();
           this.isEdit = false;
+          this.toastr.success('Hello world!', 'Toastr fun!');
         }
       });
     } else {
