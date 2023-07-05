@@ -17,6 +17,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { FooterComponent } from './layouts/footer/footer.component';
 import { PostCardComponent } from './layouts/post-card/post-card.component';
 
+import { HttpClientModule} from '@angular/common/http';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,11 +35,13 @@ import { PostCardComponent } from './layouts/post-card/post-card.component';
     CommentListComponent,
     AboutUsComponent,
     FooterComponent,
-    PostCardComponent
+    PostCardComponent,
+    
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

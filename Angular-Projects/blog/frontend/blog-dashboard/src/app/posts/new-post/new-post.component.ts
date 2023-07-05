@@ -7,6 +7,7 @@ import { ICategory } from 'src/app/shared/category.interface';
 import { IPost } from 'src/app/shared/post.interface';
 import { AngularFireStorage } from '@angular/fire/compat/storage';
 import {ActivatedRoute, Router} from '@angular/router';
+import { ToastrService } from 'ngx-toastr';
 
 
 @Component({
@@ -36,6 +37,7 @@ postId!:string;
 imgSrc?: any =  'https://t3.ftcdn.net/jpg/02/48/42/64/360_F_248426448_NVKLywWqArG2ADUxDq6QprtIzsF82dMF.jpg';
 selectedImg!: any;
 postToEdit!: IPost
+responseMessage!: string;
 
   constructor(
     private categoryService: CategoryService,
@@ -44,6 +46,7 @@ postToEdit!: IPost
     private storage: AngularFireStorage,
     private route: ActivatedRoute,
     private router: Router ,
+    private toastr: ToastrService
    
      ) { }
 
@@ -116,14 +119,15 @@ postToEdit!: IPost
        
         this.postservive.updatePost(postData, this.postId).subscribe({
               next:(res)=>{
-                
+                this.responseMessage = res.message 
+                this.toastr.success(this.responseMessage);
               },
               error:(error)=>{
                 console.log(error);
               },
               complete:()=>{
                 this.postForm.reset();
-                
+               
                 this.router.navigate(['/posts']);
               }
             })

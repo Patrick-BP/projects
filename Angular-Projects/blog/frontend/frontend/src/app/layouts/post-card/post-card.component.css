@@ -2,3 +2,6 @@
     max-width: 400px;
     
 }
+.cardLink{
+    cursor: pointer;
+}

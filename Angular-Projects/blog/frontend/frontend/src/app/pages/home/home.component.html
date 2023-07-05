@@ -8,18 +8,10 @@
             </div>
         </div>
         <div class="row">
-            <div class="col-lg-3">
-                <app-post-card></app-post-card>
+            <div class="col-lg-3" *ngFor="let featured of featuredPosts">
+                <app-post-card [data]="featured"></app-post-card>
             </div>
-            <div class="col-lg-3">
-                <app-post-card></app-post-card>
-            </div>
-            <div class="col-lg-3">
-                <app-post-card></app-post-card>
-            </div>
-            <div class="col-lg-3">
-                <app-post-card></app-post-card>
-            </div>
+            
         </div>
     </div>
 </section>
@@ -30,23 +22,9 @@
         <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Magnam cupiditate ut atque in error nihil itaque. Ipsam, id cupiditate fuga rem, numquam dolores ut quisquam amet assumenda corrupti quod minima.</p>
     </div>
     <div class="row">
-        <div class="col-md-4 mt-3">
-            <app-post-card></app-post-card>
+        <div class="col-md-4 mt-3" *ngFor="let post of postList">
+            <app-post-card [data]="post"></app-post-card>
         </div>
-        <div class="col-md-4 mt-3">
-            <app-post-card></app-post-card>
-        </div>
-        <div class="col-md-4 mt-3">
-            <app-post-card></app-post-card>
-        </div>
-        <div class="col-md-4 mt-3">
-            <app-post-card></app-post-card>
-        </div>
-        <div class="col-md-4 mt-3">
-            <app-post-card></app-post-card>
-        </div>
-        <div class="col-md-4 mt-3">
-            <app-post-card></app-post-card>
-        </div>
+        
     </div>
 </section>

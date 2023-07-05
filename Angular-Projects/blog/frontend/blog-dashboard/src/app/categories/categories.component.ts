@@ -52,7 +52,7 @@ export class CategoriesComponent implements OnInit {
           this.categoryForm.reset();
           this.refreshList();
           this.isEdit = false;
-          this.toastr.success('Hello world!', 'Toastr fun!');
+          this.toastr.success(this.responseMessage);
         }
       });
     } else {

@@ -29,7 +29,19 @@ exports.save = async (req, res)=>{
 exports.getPostById = async(req, res)=>{
 
     try{
-        const response = await Post.findById(req.params.id);
+        const response = await Post.findById(req.params.id).populate('categoryId');
+        console.log(response);
+        res.status(200).json({error: false, message:null, data: response});
+    }catch(err){
+        res.status(500).json({error: true, message: err.massage, data:null});
+    }
+    
+};
+
+exports.getPostByCategory = async(req, res)=>{
+
+    try{
+        const response = await Post.find({categoryId:req.params.id}).populate('categoryId');
         res.status(200).json({error: false, message:null, data: response});
     }catch(err){
         res.status(500).json({error: true, message: err.massage, data:null});
