@@ -18,6 +18,11 @@ import { FooterComponent } from './layouts/footer/footer.component';
 import { PostCardComponent } from './layouts/post-card/post-card.component';
 
 import { HttpClientModule} from '@angular/common/http';
+import { ReactiveFormsModule } from '@angular/forms';
+
+import { CommonModule } from '@angular/common';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
 
 
 @NgModule({
@@ -41,7 +46,11 @@ import { HttpClientModule} from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    ReactiveFormsModule,
+    CommonModule,
+    BrowserAnimationsModule,
+    ToastrModule.forRoot() 
   ],
   providers: [],
   bootstrap: [AppComponent]

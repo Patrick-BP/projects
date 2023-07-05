@@ -4,15 +4,35 @@
             <h3>SUBSCRIPTION FORM</h3>
             <p class="m-auto subs-text">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Perferendis quisquam, ullam doloremque ad rem sit expedita, asperiores assumenda voluptate perspiciatis nostrum distinctio repellendus qui quos ab maiores totam, pariatur voluptatibus?</p>
 
-            <form action="" class="form-inline mb-5 mt-5">
+            <form  class="form-inline mb-5 mt-5" [formGroup] = "subscribeForm" (ngSubmit)="onSubmit()">
                 <div class="form-group col-md-5">
-                    <input type="text" class="form-control shadow-effect" placeholder="Your Name">
+                    <input type="text" class="form-control shadow-effect" formControlName="name" placeholder="Your Name" [ngClass]="{
+                        'is-invalid': fc.name.touched && fc.name.invalid
+                      }">
+                    <div *ngIf="fc.name.errors?.['required']">
+                        <div class="alert alert-danger"  *ngIf="fc.name.touched && fc.name.invalid">  Name is required  </div>
+                    </div>
+                    <div *ngIf="!fc.name.errors?.['minLength']">
+                        <div class="alert alert-danger" *ngIf="fc.name.touched && fc.name.invalid"  >
+                            Name must be atleast 3 characters
+                        </div>
+                    </div>
                 </div>
                 <div class="form-group col-md-5">
-                    <input type="email" class="form-control shadow-effect" placeholder="Email Address">
+                    <input type="email" class="form-control shadow-effect" formControlName="email" placeholder="Email Address" [ngClass]="{
+                        'is-invalid': fc.email.touched && fc.email.invalid
+                      }">
+                    <div *ngIf="fc.email.errors?.['required']">
+                        <div class="alert alert-danger"  *ngIf="fc.email.touched && fc.email.invalid">  Email is required  </div>
+                    </div>
+                    <div *ngIf="!fc.email.errors?.['minLength']">
+                        <div class="alert alert-danger" *ngIf="fc.email.touched && fc.email.invalid"  >
+                            Email must be Valid
+                        </div>
+                    </div>
                 </div>
                 <div class="col-md-2">
-                    <button class="btn btn-info btn-block btn-theme">SUBSCRIBE</button>
+                    <button class="btn btn-info btn-block btn-theme" [disabled]="!subscribeForm.valid">SUBSCRIBE</button>
                 </div>
 
             </form>

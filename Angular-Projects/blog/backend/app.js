@@ -3,6 +3,7 @@ const cors = require('cors');
 const postRouter = require('./Routers/postRouter');
 const categoryRouter = require('./Routers/categoryRouter')
 const mongoose = require('mongoose');
+const subscriptionRouter = require('./Routers/subscriptionRouter');
 require('dotenv').config();
 
 const app = express();
@@ -19,6 +20,7 @@ const MONGODB = process.env.MONGODB
 
 app.use('/posts', postRouter);
 app.use('/categories', categoryRouter);
+app.use('/subscription', subscriptionRouter);
 
 
 app.use((req, res, next)=>{

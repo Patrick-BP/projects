@@ -48,7 +48,6 @@ import { ToastrModule } from 'ngx-toastr';
     StorageModule,
     AngularFireModule.initializeApp(environment.firebaseConfig),
     CommonModule,
-    BrowserAnimationsModule, 
     BrowserAnimationsModule,
     ToastrModule.forRoot() 
 

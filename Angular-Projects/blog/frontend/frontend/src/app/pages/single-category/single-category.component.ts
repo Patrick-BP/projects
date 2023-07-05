@@ -11,7 +11,8 @@ import { IPost } from 'src/app/shared/post.interface';
 })
 export class SingleCategoryComponent implements OnInit {
 categoryName!: String;
-  postsBycategory!: IPost[]
+  postsBycategory!: IPost[];
+  
   constructor(private route: ActivatedRoute, private postService: PostService) { }
 
   ngOnInit(): void {
@@ -19,8 +20,7 @@ categoryName!: String;
      this.categoryName = val['category'];
       this.postService.getPostByCategory(val['id']).subscribe({
         next:(res)=>{
-          this.postsBycategory = res.data
-          
+          this.postsBycategory = res.data  
         }
       })
     })

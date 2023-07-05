@@ -51,7 +51,8 @@ exports.getPostByCategory = async(req, res)=>{
 
 exports.updatePostById = async(req, res)=>{
     try{
-        const response = await Post.findOneAndUpdate({_id:req.params.id}, req.body);
+        const post = await Post.findById(req.params.id)
+        const response = await Post.findOneAndUpdate({_id:req.params.id}, {views: post.views +1 });
         res.status(200).json({error: false, message:"post updated successfuly", data: response});
     }catch(err){
         res.status(500).json({error: true, message: err.massage, data:null});

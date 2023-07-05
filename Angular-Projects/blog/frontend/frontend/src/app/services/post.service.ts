@@ -22,4 +22,8 @@ export class PostService {
   getPostByCategory(categoryId?: string){
     return this.httpclient.get<{error:"", message:"", data:IPost[]}>(environment.apiUrl+'/posts/category/'+categoryId)
   }
+
+  viewCourter(postId: string){
+    return  this.httpclient.patch<{error:"", message:"", data:IPost}>(environment.apiUrl+'/posts/'+postId, {})
+  }
 }

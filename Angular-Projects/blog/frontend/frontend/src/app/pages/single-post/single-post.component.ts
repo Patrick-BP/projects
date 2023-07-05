@@ -11,8 +11,8 @@ import { IPost } from 'src/app/shared/post.interface';
 export class SinglePostComponent implements OnInit {
  postId!: string;
  simularPosts!: IPost[]
- singlepost!: IPost;
-
+ singlepost?: IPost;
+ 
 
   constructor(private route: ActivatedRoute, private postService: PostService) { }
 
@@ -21,9 +21,12 @@ export class SinglePostComponent implements OnInit {
     this.route.params.subscribe(params => {
       this.postId = params['id'];
     });
-    this.fetchPost();
-
+    
+  this.countViews(this.postId);
+  this.fetchPost();
   }
+
+
 fetchPost(){
 this.postService.getAllPosts().subscribe({
     next:(res)=>{
@@ -31,7 +34,13 @@ this.postService.getAllPosts().subscribe({
       this.simularPosts = res.filter(post => post.categoryId.name === this.singlepost?.categoryId.name && post._id !== this.singlepost?._id)
     }
 })
-
-
 }
+countViews(postId: string){
+   this.postService.viewCourter(postId).subscribe({
+    next:(res)=>{
+      
+    }
+   })
+}
+
 }
