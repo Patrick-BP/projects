@@ -7,7 +7,7 @@ const {ObjectId} = require('mongodb')
 
 exports.getAllSubscribers = async (req, res)=>{
     try{
-        response = await Subscription.find().populate('categoryId');
+        response = await Subscription.find();
         res.status(201).json(response);
     }catch(err){
         res.status(500).json(err.message);
@@ -17,8 +17,13 @@ exports.getAllSubscribers = async (req, res)=>{
 
 exports.save = async (req, res)=>{
     try{
-        const result = await new Subscription(req.body).save();
-        res.status(200).json({error: false, message:"subscriber created successfully", data: result});
+        const findEmail = await Subscription.findOne({email:req.body.email});
+        if(findEmail){
+            res.status(400).json({error:true, message:"You are already a Subscriber", data: null});
+        }else{
+            const result = await new Subscription(req.body).save();
+            res.status(200).json({error: false, message:"Thank you for Subscribing!!", data: result});
+        }
 
     }catch(err){
         res.status(500).json({error: true, message: err.message, data:null});
@@ -27,10 +32,8 @@ exports.save = async (req, res)=>{
 };
 
 exports.getSubscriberById = async(req, res)=>{
-
     try{
-        const response = await Subscription.findById(req.params.id).populate('categoryId');
-        console.log(response);
+        const response = await Subscription.findById(req.params.id);
         res.status(200).json({error: false, message:null, data: response});
     }catch(err){
         res.status(500).json({error: true, message: err.massage, data:null});

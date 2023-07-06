@@ -1,18 +1,18 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { AllPostComponent } from './all-post.component';
+import { SubscribersComponent } from './subscribers.component';
 
-describe('AllPostComponent', () => {
-  let component: AllPostComponent;
-  let fixture: ComponentFixture<AllPostComponent>;
+describe('SubscribersComponent', () => {
+  let component: SubscribersComponent;
+  let fixture: ComponentFixture<SubscribersComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ AllPostComponent ]
+      declarations: [ SubscribersComponent ]
     })
     .compileComponents();
 
-    fixture = TestBed.createComponent(AllPostComponent);
+    fixture = TestBed.createComponent(SubscribersComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

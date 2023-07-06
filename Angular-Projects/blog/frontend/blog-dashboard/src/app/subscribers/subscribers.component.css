@@ -1,0 +1,20 @@
+.imgtd{
+    max-width: 100px;
+    }
+    .iconStyle{
+        font-size: 15px;
+        padding: 9px;
+        border: 1px solid #c9c3c3;
+        margin-left: 5px;
+        cursor: pointer;
+    }
+    .excerpttd{
+        max-width: 300px;
+        }
+    .titletd{
+            max-width: 220px;
+            }    
+    
+    .featuredBtn{
+        font-size: 13px;
+    }        

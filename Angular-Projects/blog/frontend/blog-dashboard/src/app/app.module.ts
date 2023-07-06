@@ -24,6 +24,7 @@ import { environment } from 'src/environments/environment.prod';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { SubscribersComponent } from './subscribers/subscribers.component';
 
 
 
@@ -36,6 +37,7 @@ import { ToastrModule } from 'ngx-toastr';
     CategoriesComponent,
     NewPostComponent,
     AllPostComponent,
+    SubscribersComponent,
  
   ],
   imports: [

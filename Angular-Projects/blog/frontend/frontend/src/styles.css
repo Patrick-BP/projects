@@ -56,4 +56,6 @@ input[type = text], input[type = email]{
     width: 100%;
 
 }
-
+img{
+    width: 100%;
+}

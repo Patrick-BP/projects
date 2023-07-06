@@ -24,6 +24,6 @@ export class PostService {
   }
 
   viewCourter(postId: string){
-    return  this.httpclient.patch<{error:"", message:"", data:IPost}>(environment.apiUrl+'/posts/'+postId, {})
+    return  this.httpclient.patch<{error:"", message:"", data:IPost}>(environment.apiUrl+'/posts/viewsCounter/'+postId, {})
   }
 }

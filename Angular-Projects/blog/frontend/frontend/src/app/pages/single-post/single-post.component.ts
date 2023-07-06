@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute} from '@angular/router/'
 import { PostService } from 'src/app/services/post.service';
 import { IPost } from 'src/app/shared/post.interface';
 
@@ -18,7 +18,7 @@ export class SinglePostComponent implements OnInit {
 
   ngOnInit(): void {
    
-    this.route.params.subscribe(params => {
+    this.route.params.subscribe((params: { [x: string]: string; }) => {
       this.postId = params['id'];
     });
     

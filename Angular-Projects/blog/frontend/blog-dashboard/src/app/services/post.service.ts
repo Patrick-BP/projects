@@ -30,6 +30,12 @@ updatePost(post: IPost, postid?: string){
   return this.httpClient.patch<{error:string, message:string, data:IPost}>(environment.apiUrl+`/posts/${postid}`, post)
 }
 
+
+
+setFeatured(post: IPost, postid?: string){
+  return this.httpClient.patch<{error:string, message:string, data:IPost}>(environment.apiUrl+`/posts/featured/${postid}`, post)
+}
+
 deletePost(postid: string){
   return this.httpClient.delete<{error:string, message:string, data:IPost}>(environment.apiUrl+`/posts/${postid}`)
 }

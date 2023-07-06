@@ -29,10 +29,14 @@ export class SubscriptionFormComponent implements OnInit {
     console.log(this.subscribeForm.value);
     this.subscribeService.sava(this.subscribeForm.value).subscribe({
       next:(res)=>{
-        this.responseMessage = "Thank you for Subscribing!!";
+        this.responseMessage = res.message;
         this.toastr.success(this.responseMessage);
       },
       error:(error)=>{
+        if(error.status == 400){
+          this.toastr.warning("You are already subscribe");
+          this.subscribeForm.reset();
+        }
         this.responseMessage = "subscription Failed";
         this.toastr.error(this.responseMessage);
       },

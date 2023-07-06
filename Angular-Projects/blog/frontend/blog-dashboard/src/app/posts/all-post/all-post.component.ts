@@ -51,7 +51,7 @@ export class AllPostComponent implements OnInit {
   }
 
   featuredById(isFeatured?: boolean , id?:string){
-    this.postService.updatePost({isFeatured : !isFeatured },id).subscribe({
+    this.postService.setFeatured({isFeatured : !isFeatured },id).subscribe({
       next:(res)=>{
 
       },

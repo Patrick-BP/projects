@@ -4,4 +4,6 @@
 }
 .cardLink{
     cursor: pointer;
+    text-decoration: none;
+    color: none;
 }
