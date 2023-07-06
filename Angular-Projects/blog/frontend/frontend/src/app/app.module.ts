@@ -23,6 +23,8 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
+import { TimeAgoPipe } from 'time-ago-pipe';
+
 
 
 @NgModule({
@@ -50,9 +52,11 @@ import { ToastrModule } from 'ngx-toastr';
     ReactiveFormsModule,
     CommonModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot() 
+    ToastrModule.forRoot(),
+    
+
   ],
-  providers: [],
+  providers: [TimeAgoPipe],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

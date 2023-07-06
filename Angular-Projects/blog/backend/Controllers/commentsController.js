@@ -24,6 +24,18 @@ exports.save = async (req, res)=>{
 
 };
 
+exports.getAllCommentsByPostId = async(req, res)=>{
+        const postId = req.params.id;
+    try{
+        const response = await Comment.find({postId:postId});
+        res.status(200).json(response);
+    }catch(err){
+        res.status(500).json(err.massage);
+    }
+    
+
+};
+
 exports.getCommentsById = async(req, res)=>{
     try{
         const response = await Comment.findById(req.params.id);

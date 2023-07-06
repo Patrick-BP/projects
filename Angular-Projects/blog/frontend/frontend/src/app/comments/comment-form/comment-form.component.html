@@ -3,16 +3,38 @@
         <h4>Leave a Comment</h4>
         <p>You can leave a commnet using this comment form</p>
 
-        <form>
+        <form [formGroup] = "commentForm" (ngSubmit)="onSubmit()">
             <div class="form-group">
                 <label for="">Name</label>
-                <input type="text" class="form-control shadow-effect"  placeholder="Enter your name">
+                <input type="text" class="form-control shadow-effect" formControlName="name"   placeholder="Enter your name" [ngClass]="{
+                    'is-invalid': fc.name.touched && fc.name.invalid
+                  }">
+                  <div *ngIf="fc.name.errors?.['required']">
+                    <div class="alert alert-danger"  *ngIf="fc.name.touched && fc.name.invalid">  Name is required  </div>
+                </div>
+                <div *ngIf="!fc.name.errors?.['minLength']">
+                    <div class="alert alert-danger" *ngIf="fc.name.touched && fc.name.invalid"  >
+                        Name must be atleast 3 characters
+                    </div>
+                </div>
+
             </div>
             <div class="form-group">
                 <label for="">Comment</label>
-                <textarea cols="30" rows="10" class="form-control shadow-effect" placeholder="Add your comment here"></textarea>
+                <textarea cols="30" rows="10" class="form-control shadow-effect" formControlName="comment"  placeholder="Add your comment here" [ngClass]="{
+                    'is-invalid': fc.comment.touched && fc.comment.invalid
+                  }"></textarea>
+                  <div *ngIf="fc.comment.errors?.['required']">
+                    <div class="alert alert-danger"  *ngIf="fc.comment.touched && fc.comment.invalid">  Email is required  </div>
+                </div>
+                <div *ngIf="!fc.comment.errors?.['maxLength']">
+                    <div class="alert alert-danger" *ngIf="fc.comment.touched && fc.comment.invalid"  >
+                        Comment must be less than 500 characters
+                    </div>
+                </div>
+
             </div>
-            <button class="btn btn-info  btn-theme">Add a comment</button>
+            <button class="btn btn-info  btn-theme" [disabled]="!commentForm.valid">Add a comment</button>
         </form>
     </div>
 </div>

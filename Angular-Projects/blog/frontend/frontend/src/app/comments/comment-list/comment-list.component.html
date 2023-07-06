@@ -1,12 +1,12 @@
-<div class="card mb5 mt-5 pb-5 shadow-effect">
+<div class="card mb5 mt-5 pb-5 shadow-effect" *ngIf="commentList?.length">
     <div class="card-body">
-        <h4 class="mt-3 mb-3">Comments (25)</h4>
-        <div class="comment-box mt-3">
-            <h6 class="mb-0">John Doe</h6>
-            <small class="text-danger">LAST UPDATED - SEP 20, 2023</small>
+        <h4 class="mt-3 mb-3">Comments ( {{commentList.length}} )</h4>
+        <div class="comment-box mt-3" *ngFor="let comment of commentList">
+            <h6 class="mb-0">{{comment.name}}</h6>
+            <small class="text-danger"> {{comment.createdAt | date  }}</small>
 
             <div class="mt-3 mb-3">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel ipsum praesentium sint! Laboriosam nostrum dicta quam enim at iure velit porro tempora reiciendis qui numquam a fuga, atque eveniet accusantium?
+                {{comment.comment}}
             </div>
 
             <a href="" class="mt-1">Reply</a>
@@ -15,31 +15,6 @@
 
         </div>
 
-        <div class="comment-box mt-3">
-            <h6 class="mb-0">John Doe</h6>
-            <small class="text-danger">LAST UPDATED - SEP 20, 2023</small>
-
-            <div class="mt-3 mb-3">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel ipsum praesentium sint! Laboriosam nostrum dicta quam enim at iure velit porro tempora reiciendis qui numquam a fuga, atque eveniet accusantium?
-            </div>
-
-            <a href="" class="mt-1">Reply</a>
-            <a href="" class="mt-1 ml-3">View Reply</a>
-            <hr/>
-
-        </div>
-        <div class="comment-box mt-3">
-            <h6 class="mb-0">John Doe</h6>
-            <small class="text-danger">LAST UPDATED - SEP 20, 2023</small>
-
-            <div class="mt-3 mb-3">
-                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel ipsum praesentium sint! Laboriosam nostrum dicta quam enim at iure velit porro tempora reiciendis qui numquam a fuga, atque eveniet accusantium?
-            </div>
-
-            <a href="" class="mt-1">Reply</a>
-            <a href="" class="mt-1 ml-3">View Reply</a>
-            <hr/>
-
-        </div>
+        
     </div>
 </div>
