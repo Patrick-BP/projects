@@ -88,7 +88,7 @@ exports.countViewsById = async(req, res)=>{
     }
 }
 exports.setFeaturedById = async(req, res)=>{
-    console.log(req.body);
+ 
     try{
         
         const response = await Post.findOneAndUpdate({_id:req.params.id},req.body);
