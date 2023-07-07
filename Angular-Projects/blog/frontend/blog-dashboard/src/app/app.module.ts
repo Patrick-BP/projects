@@ -19,12 +19,14 @@ import { PostService } from './services/post.service';
 
 
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFireAuthModule} from '@angular/fire/compat/auth';
 import { environment } from 'src/environments/environment.prod';
 
 import { CommonModule } from '@angular/common';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { SubscribersComponent } from './subscribers/subscribers.component';
+import { LoginComponent } from './auth/login/login.component';
 
 
 
@@ -38,6 +40,7 @@ import { SubscribersComponent } from './subscribers/subscribers.component';
     NewPostComponent,
     AllPostComponent,
     SubscribersComponent,
+    LoginComponent,
  
   ],
   imports: [
@@ -51,8 +54,8 @@ import { SubscribersComponent } from './subscribers/subscribers.component';
     AngularFireModule.initializeApp(environment.firebaseConfig),
     CommonModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot() 
-
+    ToastrModule.forRoot(),
+    AngularFireAuthModule 
   ],
   providers: [PostService],
   bootstrap: [AppComponent],
