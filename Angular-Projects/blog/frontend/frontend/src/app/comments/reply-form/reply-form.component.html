@@ -1,0 +1,47 @@
+
+<div class="card mt-1 shadow-effect">
+    <div class="card-body">
+        <form [formGroup] = "replyForm" (ngSubmit)="onSubmit()">
+            
+
+            <div class="row">
+                <div class="col-md-10">
+                    <div class="form-group">
+                
+                        <input type="text" class="form-control shadow-effect" formControlName="name"   placeholder="Enter your name" [ngClass]="{
+                            'is-invalid': fc.name.touched && fc.name.invalid
+                          }">
+                          <div *ngIf="fc.name.errors?.['required']">
+                            <div class="alert alert-danger"  *ngIf="fc.name.touched && fc.name.invalid">  Name is required  </div>
+                        </div>
+                        <div *ngIf="!fc.name.errors?.['minLength']">
+                            <div class="alert alert-danger" *ngIf="fc.name.touched && fc.name.invalid"  >
+                                Name must be atleast 3 characters
+                            </div>
+                        </div>
+        
+                    </div>
+                    <div class="form-group">
+                        <textarea cols="30" rows="3" class="form-control shadow-effect" formControlName="reply"  placeholder="Add your reply here" [ngClass]="{
+                            'is-invalid': fc.reply.touched && fc.reply.invalid
+                          }"></textarea>
+                          <div *ngIf="fc.reply.errors?.['required']">
+                            <div class="alert alert-danger"  *ngIf="fc.reply.touched && fc.reply.invalid">  Email is required  </div>
+                        </div>
+                        <div *ngIf="!fc.reply.errors?.['maxLength']">
+                            <div class="alert alert-danger" *ngIf="fc.reply.touched && fc.reply.invalid"  >
+                                reply must be less than 500 characters
+                            </div>
+                        </div>
+        
+                    </div>
+                </div>
+                <div class="col-md-2 d-flex align-items-center">
+                    <button class="btn btn-info  btn-theme" [disabled]="!replyForm.valid">Add a reply</button>
+                </div>
+                
+           </div>
+            
+        </form>
+    </div>
+</div>

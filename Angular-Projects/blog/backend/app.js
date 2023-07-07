@@ -4,7 +4,9 @@ const postRouter = require('./Routers/postRouter');
 const categoryRouter = require('./Routers/categoryRouter')
 const mongoose = require('mongoose');
 const subscriptionRouter = require('./Routers/subscriptionRouter');
-const commentsRouter = require('./Routers/commentsRouter')
+const commentsRouter = require('./Routers/commentsRouter');
+const repliesRouter = require('./Routers/repliesRouter');
+
 require('dotenv').config();
 
 const app = express();
@@ -23,6 +25,7 @@ app.use('/posts', postRouter);
 app.use('/categories', categoryRouter);
 app.use('/subscription', subscriptionRouter);
 app.use('/comments', commentsRouter);
+app.use('/replies', repliesRouter);
 
 
 

@@ -34,7 +34,7 @@ commentForm = inject(FormBuilder).nonNullable.group({
     comment: this.commentForm.value.comment
    }
 
-   console.log(comment);
+  
     this.commentService.saveComment(comment as IComment).subscribe({
       next:(res)=>{
         this.responseMessage = res.message;

@@ -9,10 +9,12 @@
                 {{comment.comment}}
             </div>
 
-            <a href="" class="mt-1">Reply</a>
-            <a href="" class="mt-1 ml-3">View Reply</a>
+            <span  class="mt-1"  (click)="showReplyForm()">Reply</span>
+            <span  class="mt-1 ml-3"  (click)="showReplyList()">View Replies </span>
             <hr/>
-
+            <app-reply-form [commentIdData]="comment._id" *ngIf="isRepliesShow"></app-reply-form>
+            <app-reply-list [commentIdData]="comment._id" *ngIf="isRepliesList"></app-reply-list>
+            
         </div>
 
         

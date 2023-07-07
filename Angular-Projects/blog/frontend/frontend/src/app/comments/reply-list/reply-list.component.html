@@ -1,0 +1,17 @@
+
+
+<div class="card mb5 mt-5  shadow-effect"  *ngIf="replyList?.length">
+    <div class="card-body" >
+        <div class="comment-box mt-3" *ngFor="let reply of replyList">
+            <h6 class="mb-0">{{reply.name}}</h6>
+            <small class="text-danger"> {{reply.createdAt | date  }}</small>
+
+            <div class="mt-3 mb-3">
+                {{reply.reply}}
+            </div>
+            <hr/>
+        </div> 
+        
+    </div>
+</div>
+

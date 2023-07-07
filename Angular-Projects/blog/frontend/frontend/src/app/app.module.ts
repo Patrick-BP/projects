@@ -25,6 +25,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { TimeAgoPipe } from 'time-ago-pipe';
 
+import { ReplyFormComponent } from './comments/reply-form/reply-form.component';
+import { ReplyListComponent } from './comments/reply-list/reply-list.component';
+
 
 
 @NgModule({
@@ -43,6 +46,8 @@ import { TimeAgoPipe } from 'time-ago-pipe';
     AboutUsComponent,
     FooterComponent,
     PostCardComponent,
+    ReplyFormComponent,
+    ReplyListComponent,
     
   ],
   imports: [
