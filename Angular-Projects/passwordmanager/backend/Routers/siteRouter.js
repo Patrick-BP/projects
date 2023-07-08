@@ -1,6 +1,6 @@
 const express = require('express');
 
-const {getAllSites, save, getSiteById, updateSiteById, deleteSiteByid } = require('../Controllers/postController')
+const {getAllSites, save, getSiteById, updateSiteById, deleteSiteByid } = require('../Controllers/siteController')
 
 const route = express.Router();
 

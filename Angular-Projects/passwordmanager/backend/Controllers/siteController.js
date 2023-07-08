@@ -16,7 +16,7 @@ exports.getAllSites = async (req, res)=>{
 exports.save = async (req, res)=>{
     try{
         const result = await new Site(req.body).save();
-        res.status(200).json({error: false, message:null, data: result});
+        res.status(200).json({error: false, message:"Site save successfully", data: result});
 
     }catch(err){
         res.status(500).json({error: true, message: err.massage, data:null});

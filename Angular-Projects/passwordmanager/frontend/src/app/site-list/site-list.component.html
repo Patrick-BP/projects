@@ -9,15 +9,15 @@
         <form #f="ngForm" (ngSubmit)="onSubmit(f.value)">
             <div class="flex flex-col">
                 <label for="" class="text-lg font-medium mb-2">Site Name</label>
-                <input type="text" ngModel name="site-name" class="border-2 border-gray-900 p-2 rounded-lg">
+                <input type="text" [(ngModel)]="siteName" name="siteName" class="border-2 border-gray-900 p-2 rounded-lg">
             </div>
             <div class="flex flex-col">
                 <label for="" class="text-lg font-medium mb-2">Site URL</label>
-                <input type="text" ngModel name="site-url" class="border-2 border-gray-900 p-2 rounded-lg">
+                <input type="text" [(ngModel)]="siteUrl" name="siteUrl" class="border-2 border-gray-900 p-2 rounded-lg">
             </div>
             <div class="flex flex-col">
                 <label for="" class="text-lg font-medium mb-2">Site Image URL</label>
-                <input type="text" ngModel name="siteImgURL" class="border-2 border-gray-900 p-2 rounded-lg">
+                <input type="text" [(ngModel)]="siteImgURL" name="siteImgUrl" class="border-2 border-gray-900 p-2 rounded-lg">
             </div>
             <button class="mt-10 mx-0.5 px-5 py-3 text-sm bg-gray-900 text-white shadow rounded-lg">Add New Site</button>
             <button class="mt-10 mx-0.5 px-5 py-3 text-sm border-2 border-gray-900 text-gray-900  shadow rounded-md">Cancel</button>

@@ -12,7 +12,7 @@ export class PasswordManagerService {
 
 
   addSite(siteData: ISite){
-   return  this.httpClient.post<ISite>(environment.apiUrl+"/sites", siteData)
+   return  this.httpClient.post<{error:string, message:string, data:ISite}>(environment.apiUrl+"/sites/new", siteData)
   }
 
   getSite(siteId: string){
