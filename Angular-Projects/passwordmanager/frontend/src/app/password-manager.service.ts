@@ -24,10 +24,10 @@ export class PasswordManagerService {
    }
   
   updateSite(siteId: string , siteData: ISite){
-    return  this.httpClient.patch<ISite>(environment.apiUrl+"/sites/"+siteId, siteData)
+    return  this.httpClient.patch<{error:string, message:string, data:ISite}>(environment.apiUrl+"/sites/"+siteId, siteData)
    }
 
    deleteSite(siteId: string){
-    return  this.httpClient.delete<ISite>(environment.apiUrl+"/sites/"+siteId)
+    return  this.httpClient.delete<{error:string, message:string, data:ISite}>(environment.apiUrl+"/sites/"+siteId)
    }
 }
