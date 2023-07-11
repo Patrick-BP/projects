@@ -1,1 +1,69 @@
-<p>login works!</p>
+<section class="bg-gray-50" >
+    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen" *ngIf="hasAccount">
+        <div class=" border-4 border-gray-900 p-5 bg-white rounded-lg shadow max-w-md">
+            <h1 class="text-2xl font-bold text-gray-900">Log in to your account</h1>
+            <form  class="space-y-6" #loginForm = "ngForm" (ngSubmit)="onSubmit(loginForm.value)">
+                <div>
+                    <label for="" class="block mb-2 text-sm font-medium text-gray-900">Your Email</label>
+                    <input type="text" name="email" ngModel class="block w-full p-2.5 text-sm bg-gray-50 border-4 border-gray-900 text-gray-900 rounded" placeholder="name@example.com">
+                </div>
+                <div>
+                    <label for="" class="block mb-2 text-sm font-medium text-gray-900">Your Password</label>
+                    <input type="password" ngModel name="password" class="block w-full p-2.5 text-sm bg-gray-50 border-4 border-gray-900 text-gray-900 rounded" placeholder="********">
+                </div>
+                <button class="w-full text-white bg-gray-800 hover:bg-gray-900 p-2 font-medium rounded-lg text-sm">Sign in</button>
+            </form>
+        </div>
+        <p class="text-gray-900 ">Don't have an Account? <span class="font-bold cursor-pointer" (click)="signUp()">Register</span></p>
+    </div>
+
+    <div class="flex flex-col items-center justify-center px-6 py-8 mx-auto h-screen" *ngIf="!hasAccount">
+        <div class=" border-4 border-gray-900 p-5 bg-white rounded-lg shadow max-w-md">
+            <h1 class="text-2xl font-bold text-gray-900">Create a new account</h1>
+            <form  class="space-y-6 mt-3" #signupForm = "ngForm" (ngSubmit)="onSignUp(signupForm.value)">
+                <div>
+                    <label for="" class="block mb-2 text-sm font-medium text-gray-900">Your Full Name</label>
+                    <input 
+                    type="text" 
+                    name="name" 
+                    ngModel 
+                    class="block w-full p-2.5 text-sm bg-gray-50 border-4 border-gray-900 text-gray-900 rounded" 
+                    placeholder="John Doe"
+                    required
+                    >
+                </div>
+                <div>
+                    <label for="" class="block mb-2 text-sm font-medium text-gray-900">Your Email</label>
+                    <input 
+                    type="text" 
+                    name="email"  
+                    class="block w-full p-2.5 text-sm bg-gray-50 border-4 border-gray-900 text-gray-900 rounded" 
+                    placeholder="name@example.com" 
+                    email
+                    required
+                    [ngClass]="{'is-invalid': signupForm.value.name.touched && signupForm.value.name.invalid}"
+                    [(ngModel)]="signupForm.value.email"
+                    >
+                   
+                </div>
+                <div>
+                    <label for="" class="block mb-2 text-sm font-medium text-gray-900">Your Password</label>
+                    <input 
+                    type="password" 
+                    ngModel 
+                    name="password" 
+                    class="block w-full p-2.5 text-sm bg-gray-50 border-4 border-gray-900 text-gray-900 rounded" 
+                    placeholder="********"
+                    required
+                    >
+                </div>
+                
+                <button class="w-full text-white bg-gray-800 hover:bg-gray-900 p-2 font-medium rounded-lg text-sm" [disabled]="!signupForm.valid">Sign Up</button>
+            </form>
+        </div>
+        <p class="text-gray-900 ">All ready have an Account? <span class="font-bold cursor-pointer" (click)="signUp()">Sign in</span></p>
+    </div>
+    
+</section>
+
+

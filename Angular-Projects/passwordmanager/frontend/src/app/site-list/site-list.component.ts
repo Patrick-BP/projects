@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { PasswordManagerService } from '../password-manager.service';
 import { ISite } from '../Shared/site.interface';
 import { ToastrService } from 'ngx-toastr';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-site-list',
@@ -15,29 +16,38 @@ export class SiteListComponent implements OnInit {
   isEdit: boolean = false
   isAddFormShown: boolean = false;
   siteId!: string;
-  isToastrShown: boolean = false
+  isToastrShown: boolean = false;
+
 
   siteName!: string;
   siteUrl!: string;
   siteImgURL!: string;
 
 
-  constructor(private toastr: ToastrService, private passwordMService: PasswordManagerService) { }
+  constructor(
+    private toastr: ToastrService,
+    private passwordMService: PasswordManagerService,
+    private router: Router,
+    private route: ActivatedRoute
+     ) { }
 
 
   ngOnInit(): void {
+    
     this.fetchSites();
+ 
   }
 
   fetchSites(){
-    this.passwordMService.getAllSites().subscribe({
+    const userId = JSON.parse(localStorage.getItem('user') as string).id
+    this.passwordMService.getAllSites(userId).subscribe({
       next:(res)=>{
         this.sitesList = res
       }
     })
   }
 
-  onSubmit(values: Object){
+  onSubmit(values: ISite){
    
       if(this.isEdit){
         this.passwordMService.updateSite(this.siteId, values as ISite).subscribe({
@@ -61,7 +71,10 @@ export class SiteListComponent implements OnInit {
         })
 
       }else{
-        this.passwordMService.addSite(values as ISite).subscribe({
+        const userid = JSON.parse(localStorage.getItem('user') as string).id
+        const obj = values;
+        obj.userId = userid
+        this.passwordMService.addSite(obj as ISite).subscribe({
           next:(res)=>{
             this.messageResponse = res.message;
             this.toastr.success(this.messageResponse)
@@ -110,9 +123,10 @@ export class SiteListComponent implements OnInit {
         this.toastr.error(this.messageResponse)
       },
       complete:()=>{
-           this.fetchSites();
-  
-             }
+           this.fetchSites();  
+        }
     })
   }
+
+ 
 }

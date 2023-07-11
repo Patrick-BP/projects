@@ -1,3 +1,4 @@
+<app-navbar></app-navbar>
 <div class="container mx-auto my-16">
     <h1 class="text-5xl mt-0 mb-5">BPB Password Manager</h1>
     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Necessitatibus incidunt, qui architecto cumque itaque ratione pariatur quis mollitia sunt enim aperiam quod, veniam fuga, voluptatum culpa deleniti nostrum temporibus facilis.</p>
@@ -27,13 +28,13 @@
         </form>
     </div>
     <div class="grid grid-cols-4 gap-5" >
-        <div class="shadow-lg border-2 border-gray-900" *ngFor="let site of sitesList">
+        <div class="shadow-lg border-2 border-gray-900" *ngFor="let site of sitesList ">
             <img src="{{site.siteImgUrl}}" alt="">
             <h3 class="p-3 text-xl font-bold"> {{site.siteName}} </h3>
             <div class="w-60 m-3 px-3 bg-blue-200 text-blue-800 rounded-lg text-sm">
                 {{site.siteUrl}}
             </div>
-            <button class="my-3 ml-3 mx-0.5 px-5 py-3 text-sm bg-gray-900 text-white shadow rounded-md">Add new Password</button>
+            <button routerLink="/password-list" class="my-3 ml-3 mx-0.5 px-5 py-3 text-sm bg-gray-900 text-white shadow rounded-md" [routerLink]="['/password-list']" [queryParams]="{ name: site.siteName, siteUrl: site.siteUrl, siteImg: site.siteImgUrl, siteId: site._id }">Add new Password</button>
             <button class="my-3 ml-3 mx-0.5 px-5 py-3 text-sm bg-white border-2 border-gray-900 text-gray-900 shadow rounded-md" (click)="editSite(site)">Edit</button>
             <button class="my-3 ml-3 mx-0.5 px-5 py-3 text-sm bg-white border-2 border-gray-900 text-gray-900 shadow rounded-md"  (click)="deleteSite(site._id)">Delete</button>
 

@@ -5,7 +5,7 @@ const {ObjectId} = require('mongodb')
 
 exports.getAllSites = async (req, res)=>{
     try{
-        response = await Site.find();
+        response = await Site.find({userId: req.params.id});
         res.status(201).json(response);
     }catch(err){
         res.status(500).json(response);

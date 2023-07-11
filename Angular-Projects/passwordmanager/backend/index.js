@@ -3,6 +3,8 @@ const cors = require('cors');
 const mongoose = require('mongoose');
 
 const siteRouter = require('./Routers/siteRouter')
+const passwordRouter = require('./Routers/passwordRouter')
+const userRouter = require('./Routers/userRouter')
 
 require('dotenv').config();
 
@@ -19,6 +21,8 @@ const MONGODB = process.env.MONGODB
     
 
 app.use('/sites', siteRouter);
+app.use('/passwords', passwordRouter);
+app.use('/users', userRouter);
 
 
 

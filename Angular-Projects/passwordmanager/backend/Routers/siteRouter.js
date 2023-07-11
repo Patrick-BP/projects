@@ -4,7 +4,7 @@ const {getAllSites, save, getSiteById, updateSiteById, deleteSiteByid } = requir
 
 const route = express.Router();
 
-route.get('/', getAllSites);
+route.get('/all/:id', getAllSites);
 route.post('/new', save);
 route.get('/:id', getSiteById);
 route.patch('/:id', updateSiteById);
